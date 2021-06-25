@@ -1,24 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import SideNav from './menu/menu';
 import './header.scss';
 
-const Header: React.FC = () => {
-  const [showMenu, setShowMenu] = useState(false);
-  const clickHandler: React.MouseEventHandler = (e) => {
-    setShowMenu((prev) => !prev);
-    // document.addEventListener()
-  };
-  const handleOutsideClick: React.MouseEventHandler = (e): void => {
-    if ((e.target as HTMLElement).closest('.overlay')) setShowMenu(false);
-  };
+interface HeaderProps {
+  isActive: string;
+  handleMenuToggle: React.MouseEventHandler;
+  handleOutsideClick: React.MouseEventHandler;
+}
 
-  const isActive = showMenu ? 'active' : '';
+const Header: React.FC<HeaderProps> = ({ isActive, handleMenuToggle, handleOutsideClick }) => {
   return (
     <>
       <header className="header">
         <div className="container">
           <div className="header__body">
-            <button className={`header__burger burger ${isActive}`} onClick={clickHandler}>
+            <button className={`header__burger burger ${isActive}`} onClick={handleMenuToggle}>
               <span className="burger__line"></span>
             </button>
             <div className="header__toggle">
