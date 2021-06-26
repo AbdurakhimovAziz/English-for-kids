@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Header from '../header/header';
 
 export const App = (): JSX.Element => {
@@ -14,7 +15,6 @@ export const App = (): JSX.Element => {
   return (
     <>
       <Header handleMenuToggle={handleMenuToggle} isActive={isActive} handleOutsideClick={handleOutsideClick} />
-      <h1>Hello World</h1>
     </>
   );
 };

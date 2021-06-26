@@ -66,7 +66,7 @@ module.exports = ({ development }) => ({
       template: './src/index.html'
     }),
     new CopyPlugin({
-      patterns: [{ from: 'public' }]
+      patterns: [{ from: 'public', to: 'public' }]
     }),
     new CleanWebpackPlugin({ cleanStaleWebpackAssets: false })
   ],
