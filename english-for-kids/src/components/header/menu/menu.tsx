@@ -1,26 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import { ICategory } from '../../../models/ICategory';
+import React, { useEffect } from 'react';
+import useActions from '../../../hooks/useActions';
+import useTypeSelector from '../../../hooks/useTypeSelector';
 import MenuItem from './menu-item';
 import './menu.scss';
 
 const SideNav: React.FC<{ className: string }> = ({ className }) => {
-  const [categories, setCategories] = useState<ICategory[] | null>(null);
-  const getCategories = async () => {
-    const response = await fetch('./public/cards.json');
-    const data: ICategory[] = await response.json();
-    setCategories(data);
-  };
+  const { cardCategories } = useTypeSelector((state) => state.cards);
+  const { fetchCards } = useActions();
 
   useEffect(() => {
-    getCategories();
+    fetchCards();
   }, []);
 
   return (
     <nav id="sideNav" className={`menu bg-info ${className}`}>
       <ul className="menu__list">
         <MenuItem link="/">Main</MenuItem>
-        {categories &&
-          categories.map((category, index) => (
+        {cardCategories &&
+          cardCategories.map((category, index) => (
             <MenuItem link="/cards" key={index}>
               {category.category}
             </MenuItem>

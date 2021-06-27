@@ -1,28 +1,15 @@
-import React, { useCallback, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
 import SideNav from './menu/menu';
 import './header.scss';
-import { toggleMenu, closeMenu } from '../../store/actionCreators';
+import useActions from '../../hooks/useActions';
+import useTypeSelector from '../../hooks/useTypeSelector';
 
 const Header: React.FC = () => {
-  const isMenuVisible = useSelector((s: AppState) => s.isMenuVisible);
-  const dispatch = useDispatch();
-  const [isChecked, setIsChecked] = useState(false);
-
-  const handleMenuToggle = useCallback(() => {
-    dispatch(toggleMenu());
-  }, [toggleMenu, dispatch]);
-
-  const hideMenu = useCallback(() => {
-    dispatch(closeMenu());
-  }, [toggleMenu, dispatch]);
-
-  const handleAppModeToggle: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    setIsChecked(e.target.checked);
-  };
+  const { isMenuVisible, isPlayMode } = useTypeSelector((state) => state.global);
+  const { toggleMenu, closeMenu, toggleAppMode } = useActions();
 
   const handleOutsideClick: React.MouseEventHandler = (e): void => {
-    if ((e.target as HTMLElement).closest('.overlay')) hideMenu();
+    if ((e.target as HTMLElement).closest('.overlay')) closeMenu();
   };
 
   const isActive = isMenuVisible ? 'active' : '';
@@ -31,13 +18,13 @@ const Header: React.FC = () => {
       <header className="header">
         <div className="container">
           <div className="header__body">
-            <button className={`header__burger burger ${isActive}`} onClick={handleMenuToggle}>
+            <button className={`header__burger burger ${isActive}`} onClick={toggleMenu}>
               <span className="burger__line"></span>
             </button>
             <label className="header__toggle">
-              <input type="checkbox" onChange={handleAppModeToggle} />
+              <input type="checkbox" onChange={toggleAppMode} />
               <span className="header__toggle-text">
-                <span>{isChecked ? 'Play' : 'Train'}</span>
+                <span>{isPlayMode ? 'Play' : 'Train'}</span>
               </span>
             </label>
           </div>

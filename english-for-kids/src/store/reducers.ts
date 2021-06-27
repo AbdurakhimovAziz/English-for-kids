@@ -1,7 +1,9 @@
+import { combineReducers } from 'redux';
 import ActionTypes from './actionTypes';
 import InitialState from './initialState';
+import { CardsState, GlobalState, IAction } from './types';
 
-const rootReducer = (state: AppState = InitialState, action: IAction): AppState => {
+const globalReducer = (state: GlobalState = InitialState, action: IAction): GlobalState => {
   switch (action.type) {
     case ActionTypes.TOGGLE_MENU:
       return {
@@ -13,9 +15,33 @@ const rootReducer = (state: AppState = InitialState, action: IAction): AppState 
         ...state,
         isMenuVisible: false
       };
+    case ActionTypes.TOGGLE_APP_MODE:
+      return {
+        ...state,
+        isPlayMode: !state.isPlayMode
+      };
     default:
       return state;
   }
 };
 
-export default rootReducer;
+const cardsReducer = (state: CardsState = InitialState, action: IAction): CardsState => {
+  switch (action.type) {
+    case ActionTypes.FETCH_CARDS:
+      return action.data
+        ? {
+            ...state,
+            cardCategories: [...state.cardCategories, ...action.data]
+          }
+        : state;
+    default:
+      return state;
+  }
+};
+
+export const rootReducer = combineReducers({
+  global: globalReducer,
+  cards: cardsReducer
+});
+
+export type RootState = ReturnType<typeof rootReducer>;

@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-// import { useSelector } from 'react-redux';
+import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Cards from '../../pages/Cards/Cards';
 import Home from '../../pages/Home/Home';
