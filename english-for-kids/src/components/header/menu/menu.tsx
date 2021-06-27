@@ -18,7 +18,13 @@ const SideNav: React.FC<{ className: string }> = ({ className }) => {
   return (
     <nav id="sideNav" className={`menu bg-info ${className}`}>
       <ul className="menu__list">
-        {categories && categories.map((category, index) => <MenuItem key={index}>{category.category}</MenuItem>)}
+        <MenuItem link="/">Main</MenuItem>
+        {categories &&
+          categories.map((category, index) => (
+            <MenuItem link="/cards" key={index}>
+              {category.category}
+            </MenuItem>
+          ))}
       </ul>
     </nav>
   );

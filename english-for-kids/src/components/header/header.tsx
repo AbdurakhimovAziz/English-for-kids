@@ -1,20 +1,31 @@
-import React, { useRef, useState } from 'react';
+import React, { useCallback, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import SideNav from './menu/menu';
 import './header.scss';
+import { toggleMenu, closeMenu } from '../../store/actionCreators';
 
-interface HeaderProps {
-  isActive: string;
-  handleMenuToggle: React.MouseEventHandler;
-  handleOutsideClick: React.MouseEventHandler;
-}
-
-const Header: React.FC<HeaderProps> = ({ isActive, handleMenuToggle, handleOutsideClick }) => {
+const Header: React.FC = () => {
+  const isMenuVisible = useSelector((s: AppState) => s.isMenuVisible);
+  const dispatch = useDispatch();
   const [isChecked, setIsChecked] = useState(false);
+
+  const handleMenuToggle = useCallback(() => {
+    dispatch(toggleMenu());
+  }, [toggleMenu, dispatch]);
+
+  const hideMenu = useCallback(() => {
+    dispatch(closeMenu());
+  }, [toggleMenu, dispatch]);
 
   const handleAppModeToggle: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     setIsChecked(e.target.checked);
   };
 
+  const handleOutsideClick: React.MouseEventHandler = (e): void => {
+    if ((e.target as HTMLElement).closest('.overlay')) hideMenu();
+  };
+
+  const isActive = isMenuVisible ? 'active' : '';
   return (
     <>
       <header className="header">

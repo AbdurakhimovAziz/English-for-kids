@@ -10,6 +10,7 @@ const devServer = (isDev) =>
     ? {}
     : {
         devServer: {
+          historyApiFallback: true,
           open: true,
           hot: true,
           port: 8080,
@@ -28,18 +29,20 @@ module.exports = ({ development }) => ({
   output: {
     filename: '[name].[contenthash].js',
     path: path.resolve(__dirname, 'dist'),
-    assetModuleFilename: 'assets/[hash][ext]'
+    assetModuleFilename: 'assets/[hash][ext]',
+    publicPath: '/'
   },
   module: {
     rules: [
       {
-        test: /\.[tj]s$/,
+        test: /\.(js|jsx)$/,
         use: 'ts-loader',
         exclude: /node_modules/
       },
       {
         test: /\.(ts|tsx)$/,
-        loader: 'ts-loader'
+        loader: 'ts-loader',
+        exclude: /node_modules/
       },
       {
         test: /\.(?:ico|gif|png|jpg|jpeg|svg)$/i,

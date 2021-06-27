@@ -15,7 +15,8 @@
     color: #818181;
     display: block;
     transition: 0.3s color;
-    &:hover {
+    &:hover,
+    &.active {
       color: #f1f1f1;
     }
   }

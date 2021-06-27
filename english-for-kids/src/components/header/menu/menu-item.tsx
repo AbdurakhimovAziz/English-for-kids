@@ -1,11 +1,18 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
-const MenuItem: React.FC<{ children: string }> = ({ children }) => {
+interface Props {
+  children: string;
+  link: string;
+  // onclick: React.MouseEventHandler;
+}
+
+const MenuItem: React.FC<Props> = ({ children, link }) => {
   return (
     <li className="menu__list-item">
-      <a href="#" className="menu__link">
+      <NavLink activeClassName="active" exact to={link} className="menu__link">
         {children}
-      </a>
+      </NavLink>
     </li>
   );
 };

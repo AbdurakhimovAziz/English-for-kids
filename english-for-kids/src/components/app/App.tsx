@@ -1,20 +1,24 @@
 import React, { useState } from 'react';
+// import { useSelector } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Cards from '../../pages/Cards/Cards';
+import Home from '../../pages/Home/Home';
 import Header from '../header/header';
 
 export const App = (): JSX.Element => {
-  const [showMenu, setShowMenu] = useState(false);
-  const handleMenuToggle: React.MouseEventHandler = () => {
-    setShowMenu((prev) => !prev);
-  };
-  const handleOutsideClick: React.MouseEventHandler = (e): void => {
-    if ((e.target as HTMLElement).closest('.overlay')) setShowMenu(false);
-  };
-
-  const isActive = showMenu ? 'active' : '';
   return (
-    <>
-      <Header handleMenuToggle={handleMenuToggle} isActive={isActive} handleOutsideClick={handleOutsideClick} />
-    </>
+    <Router>
+      <Header />
+      <main>
+        <Switch>
+          <Route path="/" exact>
+            <Home />
+          </Route>
+          <Route path="/cards">
+            <Cards />
+          </Route>
+        </Switch>
+      </main>
+    </Router>
   );
 };
