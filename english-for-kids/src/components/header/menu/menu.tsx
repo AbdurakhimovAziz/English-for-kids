@@ -1,16 +1,10 @@
-import React, { useEffect } from 'react';
-import useActions from '../../../hooks/useActions';
+import React from 'react';
 import useTypeSelector from '../../../hooks/useTypeSelector';
 import MenuItem from './menu-item';
 import './menu.scss';
 
 const SideNav: React.FC<{ className: string }> = ({ className }) => {
   const { cardCategories } = useTypeSelector((state) => state.cards);
-  const { fetchCards } = useActions();
-
-  useEffect(() => {
-    fetchCards();
-  }, []);
 
   return (
     <nav id="sideNav" className={`menu bg-info ${className}`}>

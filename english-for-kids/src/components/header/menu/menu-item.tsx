@@ -12,7 +12,13 @@ const MenuItem: React.FC<Props> = ({ children, link }) => {
 
   return (
     <li className="menu__list-item">
-      <NavLink activeClassName="active" exact to={link} className="menu__link" onClick={closeMenu}>
+      <NavLink
+        activeClassName="active"
+        exact
+        to={{ pathname: link, state: children }}
+        className="menu__link"
+        onClick={closeMenu}
+      >
         {children}
       </NavLink>
     </li>
