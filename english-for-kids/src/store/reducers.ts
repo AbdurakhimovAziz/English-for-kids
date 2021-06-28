@@ -25,7 +25,7 @@ const globalReducer = (state: GlobalState = InitialState, action: IAction): Glob
   }
 };
 
-const cardsReducer = (state: CardsState = InitialState, action: IAction): CardsState => {
+const categoriesReducer = (state: CardsState = InitialState, action: IAction): CardsState => {
   switch (action.type) {
     case ActionTypes.FETCH_CARDS:
       return action.data
@@ -41,7 +41,7 @@ const cardsReducer = (state: CardsState = InitialState, action: IAction): CardsS
 
 export const rootReducer = combineReducers({
   global: globalReducer,
-  cards: cardsReducer
+  categories: categoriesReducer
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

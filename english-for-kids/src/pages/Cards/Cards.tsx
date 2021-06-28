@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import useTypeSelector from '../../hooks/useTypeSelector';
 
 const Cards: React.FC = () => {
-  const { cardCategories } = useTypeSelector((state) => state.cards);
+  const { cardCategories } = useTypeSelector((state) => state.categories);
   const params = useLocation();
   const currentCategory = cardCategories.find((category) => category.category === params.state);
   const cards = currentCategory?.cards.map((card) => card.word);
