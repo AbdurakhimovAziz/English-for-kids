@@ -6,3 +6,24 @@ body {
   font-size: 14px;
   font-weight: 400;
 }
+
+body.locked {
+  overflow: hidden;
+}
+
+.container {
+  max-width: 1230px;
+  padding: 0 15px;
+  margin: 0 auto;
+  @media screen and (max-width: 968px) {
+    max-width: 730px;
+  }
+}
+
+.cards__row {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  z-index: 0;
+}

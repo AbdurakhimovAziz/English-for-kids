@@ -1,6 +1,6 @@
 import { ICard } from './ICard';
 
 export interface ICategory {
-  category: string;
+  categoryName: string;
   cards: ICard[];
 }

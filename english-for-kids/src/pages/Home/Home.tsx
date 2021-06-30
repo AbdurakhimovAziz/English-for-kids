@@ -2,21 +2,31 @@ import * as React from 'react';
 import { NavLink } from 'react-router-dom';
 import useTypeSelector from '../../hooks/useTypeSelector';
 import { CARDS_URL } from '../../shared/constants';
+import './home.scss';
 
 const Home: React.FC = () => {
   const { cardCategories } = useTypeSelector((state) => state.categories);
 
   return (
-    <div className="categories">
-      <h1>Categories</h1>
-      <p>
-        {cardCategories.map((cat, index) => (
-          <NavLink style={{ display: 'block' }} to={{ pathname: CARDS_URL, state: cat.category }} key={index}>
-            {cat.category}
-          </NavLink>
-        ))}
-      </p>
-    </div>
+    <>
+      <div className="container">
+        <h1>Categories</h1>
+        <div className="categories cards__row">
+          {cardCategories.map((category, index) => (
+            <NavLink
+              className="categories__card card"
+              to={{ pathname: CARDS_URL, state: category.categoryName }}
+              key={index}
+            >
+              <div className="card__image">
+                <img src={`./public/${category.cards[0].image}`} />
+              </div>
+              <div className="card__title title--black">{category.categoryName}</div>
+            </NavLink>
+          ))}
+        </div>
+      </div>
+    </>
   );
 };
 

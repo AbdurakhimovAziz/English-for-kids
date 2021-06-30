@@ -1,6 +1,6 @@
 [
   {
-    "category": "Action (set A)",
+    "categoryName": "Action (set A)",
     "cards": [
       {
         "word": "cry",
@@ -53,7 +53,7 @@
     ]
   },
   {
-    "category": "Action (set B)",
+    "categoryName": "Action (set B)",
     "cards": [
       {
         "word": "open",
@@ -106,7 +106,7 @@
     ]
   },
   {
-    "category": "Animal (set A)",
+    "categoryName": "Animal (set A)",
     "cards": [
       {
         "word": "cat",
@@ -159,7 +159,7 @@
     ]
   },
   {
-    "category": "Animal (set B)",
+    "categoryName": "Animal (set B)",
     "cards": [
       {
         "word": "bird",
@@ -212,7 +212,7 @@
     ]
   },
   {
-    "category": "Clothes",
+    "categoryName": "Clothes",
     "cards": [
       {
         "word": "skirt",
@@ -265,7 +265,7 @@
     ]
   },
   {
-    "category": "Emotions",
+    "categoryName": "Emotions",
     "cards": [
       {
         "word": "sad",

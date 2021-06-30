@@ -22,14 +22,14 @@ const SideNav: React.FC<{ className: string }> = ({ className }) => {
         {cardCategories.map((category, index) => (
           <MenuItem key={index + 1}>
             <NavLink
-              to={{ pathname: CARDS_URL, state: category.category }}
+              to={{ pathname: CARDS_URL, state: category.categoryName }}
               className={`menu__link `}
               onClick={closeMenu}
               activeClassName="active"
-              isActive={() => params.state === category.category}
+              isActive={() => params.state === category.categoryName}
               exact
             >
-              {category.category}
+              {category.categoryName}
             </NavLink>
           </MenuItem>
         ))}

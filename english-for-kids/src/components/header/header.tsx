@@ -1,8 +1,8 @@
 import React from 'react';
 import SideNav from './menu/menu';
-import './header.scss';
 import useActions from '../../hooks/useActions';
 import useTypeSelector from '../../hooks/useTypeSelector';
+import './header.scss';
 
 const Header: React.FC = () => {
   const { isMenuVisible, isPlayMode } = useTypeSelector((state) => state.global);

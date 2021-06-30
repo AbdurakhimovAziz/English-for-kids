@@ -7,7 +7,6 @@ import Header from '../header/header';
 
 export const App = (): JSX.Element => {
   const { fetchCards } = useActions();
-
   useEffect(() => {
     fetchCards();
   }, []);

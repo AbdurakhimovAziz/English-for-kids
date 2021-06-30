@@ -6,11 +6,13 @@ import { CardsState, GlobalState, IAction } from './types';
 const globalReducer = (state: GlobalState = InitialState, action: IAction): GlobalState => {
   switch (action.type) {
     case ActionTypes.TOGGLE_MENU:
+      document.body.classList.toggle('locked');
       return {
         ...state,
         isMenuVisible: !state.isMenuVisible
       };
     case ActionTypes.HIDE_MENU:
+      document.body.classList.remove('locked');
       return {
         ...state,
         isMenuVisible: false
