@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { useLocation } from 'react-router-dom';
+import Card from '../../components/card/card';
 import useTypeSelector from '../../hooks/useTypeSelector';
+import './cards.scss';
 
 const Cards: React.FC = () => {
   const { cardCategories } = useTypeSelector((state) => state.categories);
@@ -13,14 +15,13 @@ const Cards: React.FC = () => {
       <p>{currentCategory?.categoryName}</p>
       <div className="cards__row">
         {currentCategory?.cards.map((card, index) => (
-          <div className="card" key={index}>
-            <div className="card__front" style={{ backgroundImage: `url(./public/${card.image})` }}>
-              <div className="card__title title--black">{card.word}</div>
-            </div>
-            <div className="card__back" style={{ backgroundImage: `url(./public/${card.image})` }}>
-              <div className="card__title title--black">{card.translation}</div>
-            </div>
-          </div>
+          <Card
+            imgSrc={card.image}
+            word={card.word}
+            translation={card.translation}
+            audioSrc={card.audioSrc}
+            key={index}
+          />
         ))}
       </div>
     </div>

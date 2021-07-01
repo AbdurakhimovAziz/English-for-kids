@@ -18,10 +18,10 @@ const Home: React.FC = () => {
               to={{ pathname: CARDS_URL, state: category.categoryName }}
               key={index}
             >
-              <div className="card__image">
+              <div className="categories__card-img">
                 <img src={`./public/${category.cards[0].image}`} />
               </div>
-              <div className="card__title title--black">{category.categoryName}</div>
+              <div className="categories__card-title">{category.categoryName}</div>
             </NavLink>
           ))}
         </div>
