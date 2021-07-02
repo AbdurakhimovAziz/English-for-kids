@@ -39,6 +39,12 @@ export const addCorrectMove = (): GameAction => {
   };
 };
 
+export const addWrongMove = (): GameAction => {
+  return {
+    type: ActionTypes.ADD_WRONG
+  };
+};
+
 export const setCurrentCard = (card: ICard) => {
   return async (dispatch: Dispatch<GameAction>): Promise<void> => {
     dispatch({

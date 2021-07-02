@@ -48,6 +48,11 @@ const gameReducer = (state: GameState = gameInitialState, action: GameAction): G
         ...state,
         correct: ++state.correct
       };
+    case ActionTypes.ADD_WRONG:
+      return {
+        ...state,
+        wrong: ++state.wrong
+      };
     case ActionTypes.SET_CURRENT_CARD:
       return action.card
         ? {
@@ -61,13 +66,9 @@ const gameReducer = (state: GameState = gameInitialState, action: GameAction): G
         gameStarted: true
       };
     case ActionTypes.STOP_GAME:
-      return {
-        gameCards: [],
-        currentCard: null,
-        correct: 0,
-        wrong: 0,
-        gameStarted: false
-      };
+      console.log('stop');
+
+      return gameInitialState;
     case ActionTypes.SET_GAME_CARDS:
       return action.cards
         ? {

@@ -1,18 +1,26 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Switch, Route, useLocation } from 'react-router-dom';
 import useActions from '../../hooks/useActions';
+import useTypeSelector from '../../hooks/useTypeSelector';
 import Cards from '../../pages/Cards/Cards';
 import Home from '../../pages/Home/Home';
 import Header from '../header/header';
 
 export const App = (): JSX.Element => {
-  const { fetchCards } = useActions();
+  const { fetchCards, stopGame } = useActions();
+  const { gameStarted } = useTypeSelector((state) => state.game);
+  const location = useLocation();
+
   useEffect(() => {
     fetchCards();
   }, []);
 
+  useEffect(() => {
+    if (gameStarted) stopGame();
+  }, [location]);
+
   return (
-    <Router>
+    <>
       <Header />
       <main className="main">
         <Switch>
@@ -24,6 +32,6 @@ export const App = (): JSX.Element => {
           </Route>
         </Switch>
       </main>
-    </Router>
+    </>
   );
 };

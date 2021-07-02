@@ -10,19 +10,19 @@ import './cards.scss';
 const Cards: React.FC = () => {
   const { cardCategories } = useTypeSelector((state) => state.categories);
   const { isPlayMode } = useTypeSelector((state) => state.global);
-  const params = useLocation();
+  const location = useLocation();
 
-  const currentCategory = cardCategories.find((category) => category.categoryName === params.state);
+  const currentCategory = cardCategories.find((category) => category.categoryName === location.state);
 
   const { currentCard, correct, gameStarted, gameCards } = useTypeSelector((state) => state.game);
   const { setCurrentCard, startGame, setGameCards } = useActions();
 
-  const gameHandler: React.MouseEventHandler = (e) => {
+  const gameHandler: React.MouseEventHandler = () => {
     if (gameStarted) {
       playAudio(currentCard?.audioSrc);
     } else {
-      const btn = e.target as HTMLButtonElement;
-      btn.classList.add('repeat');
+      // const btn = e.target as HTMLButtonElement;
+      // btn.classList.add('repeat');
       const cards = currentCategory?.cards.slice().sort(() => Math.random() - 0.5);
       if (cards) {
         setGameCards(cards);
@@ -60,7 +60,7 @@ const Cards: React.FC = () => {
       </div>
       {isPlayMode ? (
         <div className="btn__container">
-          <button className="btn" onClick={gameHandler}>
+          <button className={`btn ${gameStarted ? 'repeat' : ''}`} onClick={gameHandler}>
             start game
           </button>
         </div>

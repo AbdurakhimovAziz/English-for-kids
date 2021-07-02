@@ -6,24 +6,25 @@ import './header.scss';
 
 const Header: React.FC = () => {
   const { isMenuVisible, isPlayMode } = useTypeSelector((state) => state.global);
+  const { gameStarted } = useTypeSelector((state) => state.game);
   const { toggleMenu, closeMenu, toggleAppMode, stopGame } = useActions();
 
   const appModeHandler = () => {
+    if (gameStarted) stopGame();
     toggleAppMode();
-    if (!isPlayMode) stopGame();
   };
 
   const handleOutsideClick: React.MouseEventHandler = (e): void => {
     if ((e.target as HTMLElement).closest('.overlay')) closeMenu();
   };
 
-  const isActive = isMenuVisible ? 'active' : '';
+  const active = isMenuVisible ? 'active' : '';
   return (
     <>
       <header className="header">
         <div className="container">
           <div className="header__body">
-            <button className={`header__burger burger ${isActive}`} onClick={toggleMenu}>
+            <button className={`header__burger burger ${active}`} onClick={toggleMenu}>
               <span className="burger__line"></span>
             </button>
             <label className="header__toggle">
@@ -35,9 +36,9 @@ const Header: React.FC = () => {
           </div>
         </div>
       </header>
-      <SideNav className={isActive} />
+      <SideNav className={active} />
 
-      <div className={`overlay ${isActive}`} onClick={handleOutsideClick}></div>
+      <div className={`overlay ${active}`} onClick={handleOutsideClick}></div>
     </>
   );
 };

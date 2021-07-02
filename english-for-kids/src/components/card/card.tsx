@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import rotateImg from '../../assets/rotate.svg';
 import useActions from '../../hooks/useActions';
 import useTypeSelector from '../../hooks/useTypeSelector';
@@ -12,11 +12,12 @@ interface PropTypes {
 }
 
 const ROTATE_CLASS = 'rotate';
+const CORRECT_CLASS = 'correct';
 
 const Card: React.FC<PropTypes> = ({ imgSrc, word, translation, audioSrc }) => {
   const { isPlayMode } = useTypeSelector((state) => state.global);
   const { currentCard, gameStarted } = useTypeSelector((state) => state.game);
-  const { addCorrectMove } = useActions();
+  const { addCorrectMove, addWrongMove } = useActions();
 
   const card = useRef<HTMLDivElement>(null);
   const clickHandler = () => {
@@ -24,11 +25,19 @@ const Card: React.FC<PropTypes> = ({ imgSrc, word, translation, audioSrc }) => {
       if (currentCard?.word === word) {
         console.log('correct');
         addCorrectMove();
+        card.current?.classList.add(CORRECT_CLASS);
+      } else {
+        addWrongMove();
       }
     }
     if (isPlayMode) return;
     playAudio(audioSrc);
   };
+
+  useEffect(() => {
+    if (!gameStarted) card.current?.classList.remove(CORRECT_CLASS);
+  }, [gameStarted]);
+
   return (
     <div className="cards__card" ref={card} onMouseLeave={() => card.current?.classList.remove(ROTATE_CLASS)}>
       <div className="card__front card" onClick={clickHandler}>
