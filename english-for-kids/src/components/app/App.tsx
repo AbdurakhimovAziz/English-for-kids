@@ -14,7 +14,7 @@ export const App = (): JSX.Element => {
   return (
     <Router>
       <Header />
-      <main>
+      <main className="main">
         <Switch>
           <Route path="/" exact>
             <Home />

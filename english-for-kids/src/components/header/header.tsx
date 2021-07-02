@@ -6,7 +6,12 @@ import './header.scss';
 
 const Header: React.FC = () => {
   const { isMenuVisible, isPlayMode } = useTypeSelector((state) => state.global);
-  const { toggleMenu, closeMenu, toggleAppMode } = useActions();
+  const { toggleMenu, closeMenu, toggleAppMode, stopGame } = useActions();
+
+  const appModeHandler = () => {
+    toggleAppMode();
+    if (!isPlayMode) stopGame();
+  };
 
   const handleOutsideClick: React.MouseEventHandler = (e): void => {
     if ((e.target as HTMLElement).closest('.overlay')) closeMenu();
@@ -22,7 +27,7 @@ const Header: React.FC = () => {
               <span className="burger__line"></span>
             </button>
             <label className="header__toggle">
-              <input type="checkbox" onChange={toggleAppMode} />
+              <input type="checkbox" onChange={appModeHandler} />
               <span className="header__toggle-text">
                 <span>{isPlayMode ? 'Play' : 'Train'}</span>
               </span>

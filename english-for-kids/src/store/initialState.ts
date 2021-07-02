@@ -1,9 +1,18 @@
-import { CardsState, GlobalState } from './types';
+import { CardsState, GameState, GlobalState } from './types';
 
-const InitialState: GlobalState & CardsState = {
+export const globalInitialState: GlobalState = {
   isMenuVisible: false,
-  isPlayMode: false,
+  isPlayMode: false
+};
+
+export const cardsInitialState: CardsState = {
   cardCategories: []
 };
 
-export default InitialState;
+export const gameInitialState: GameState = {
+  gameCards: [],
+  currentCard: null,
+  correct: 0,
+  wrong: 0,
+  gameStarted: false
+};
