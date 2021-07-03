@@ -6,6 +6,10 @@ import useActions from '../../hooks/useActions';
 import useTypeSelector from '../../hooks/useTypeSelector';
 import playAudio from '../../shared/playAudio';
 import './cards.scss';
+import correctImg from '../../assets/correct.png';
+import wrongImg from '../../assets/wrong.png';
+import happy from '../../assets/happy.svg';
+import sad from '../../assets/sad.svg';
 
 const Cards: React.FC = () => {
   const { cardCategories } = useTypeSelector((state) => state.categories);
@@ -17,12 +21,10 @@ const Cards: React.FC = () => {
   const { currentCard, correct, gameStarted, gameCards } = useTypeSelector((state) => state.game);
   const { setCurrentCard, startGame, setGameCards } = useActions();
 
-  const gameHandler: React.MouseEventHandler = () => {
+  const gameHandler: React.MouseEventHandler = async (e) => {
     if (gameStarted) {
-      playAudio(currentCard?.audioSrc);
+      playAudio(`./public/${currentCard?.audioSrc}`);
     } else {
-      // const btn = e.target as HTMLButtonElement;
-      // btn.classList.add('repeat');
       const cards = currentCategory?.cards.slice().sort(() => Math.random() - 0.5);
       if (cards) {
         setGameCards(cards);
@@ -33,13 +35,15 @@ const Cards: React.FC = () => {
 
   useEffect(() => {
     if (gameStarted) {
+      if (gameCards.length === correct) console.log('won');
+
       setCurrentCard(gameCards[correct]);
     }
   }, [gameStarted, correct]);
 
   useEffect(() => {
     if (gameStarted) {
-      playAudio(currentCard?.audioSrc);
+      playAudio(`./public/${currentCard?.audioSrc}`);
       console.log(currentCard);
     }
   }, [currentCard]);

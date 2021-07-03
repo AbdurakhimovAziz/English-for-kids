@@ -3,6 +3,9 @@ import rotateImg from '../../assets/rotate.svg';
 import useActions from '../../hooks/useActions';
 import useTypeSelector from '../../hooks/useTypeSelector';
 import playAudio from '../../shared/playAudio';
+import correctSound from '../../assets/correct.mp3';
+import wrongSound from '../../assets/error.mp3';
+import delay from '../../shared/delay';
 
 interface PropTypes {
   imgSrc: string;
@@ -24,14 +27,17 @@ const Card: React.FC<PropTypes> = ({ imgSrc, word, translation, audioSrc }) => {
     if (gameStarted) {
       if (currentCard?.word === word) {
         console.log('correct');
-        addCorrectMove();
+        playAudio(correctSound);
+
+        delay(1000).then(() => addCorrectMove());
         card.current?.classList.add(CORRECT_CLASS);
       } else {
+        playAudio(wrongSound);
         addWrongMove();
       }
     }
     if (isPlayMode) return;
-    playAudio(audioSrc);
+    playAudio(`./public/${audioSrc}`);
   };
 
   useEffect(() => {

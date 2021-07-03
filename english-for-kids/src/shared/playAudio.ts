@@ -1,6 +1,6 @@
 const playAudio = (src: string | undefined): void => {
   if (src) {
-    const audio = new Audio(`./public/${src}`);
+    const audio = new Audio(src);
     if (HTMLMediaElement.HAVE_FUTURE_DATA) audio.play();
   }
 };
