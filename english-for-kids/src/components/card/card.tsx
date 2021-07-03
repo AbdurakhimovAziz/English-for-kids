@@ -28,7 +28,6 @@ const Card: React.FC<PropTypes> = ({ imgSrc, word, translation, audioSrc }) => {
       if (currentCard?.word === word) {
         console.log('correct');
         playAudio(correctSound);
-
         delay(1000).then(() => addCorrectMove());
         card.current?.classList.add(CORRECT_CLASS);
       } else {

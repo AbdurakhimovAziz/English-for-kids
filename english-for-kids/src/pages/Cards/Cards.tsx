@@ -1,27 +1,30 @@
 import * as React from 'react';
-import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
 import Card from '../../components/card/card';
 import useActions from '../../hooks/useActions';
 import useTypeSelector from '../../hooks/useTypeSelector';
 import playAudio from '../../shared/playAudio';
 import './cards.scss';
-import correctImg from '../../assets/correct.png';
-import wrongImg from '../../assets/wrong.png';
 import happy from '../../assets/happy.svg';
 import sad from '../../assets/sad.svg';
+import delay from '../../shared/delay';
 
 const Cards: React.FC = () => {
   const { cardCategories } = useTypeSelector((state) => state.categories);
   const { isPlayMode } = useTypeSelector((state) => state.global);
   const location = useLocation();
+  const history = useHistory();
+
+  const [answers, setAnswers] = useState<string[]>([]);
+  const [isGameOver, setIsGameOver] = useState(false);
 
   const currentCategory = cardCategories.find((category) => category.categoryName === location.state);
 
-  const { currentCard, correct, gameStarted, gameCards } = useTypeSelector((state) => state.game);
+  const { currentCard, correct, wrong, gameStarted, gameCards } = useTypeSelector((state) => state.game);
   const { setCurrentCard, startGame, setGameCards } = useActions();
 
-  const gameHandler: React.MouseEventHandler = async (e) => {
+  const gameHandler: React.MouseEventHandler = async () => {
     if (gameStarted) {
       playAudio(`./public/${currentCard?.audioSrc}`);
     } else {
@@ -35,11 +38,19 @@ const Cards: React.FC = () => {
 
   useEffect(() => {
     if (gameStarted) {
-      if (gameCards.length === correct) console.log('won');
+      if (correct > 0 && correct < gameCards.length) setAnswers((prev) => [...prev, 'correct']);
+      if (gameCards.length === correct) {
+        setIsGameOver(true);
+        delay(3000).then(() => history.push('/'));
+      }
 
       setCurrentCard(gameCards[correct]);
     }
   }, [gameStarted, correct]);
+
+  useEffect(() => {
+    if (gameStarted && wrong > 0) setAnswers((prev) => [...prev, 'wrong']);
+  }, [wrong]);
 
   useEffect(() => {
     if (gameStarted) {
@@ -48,9 +59,16 @@ const Cards: React.FC = () => {
     }
   }, [currentCard]);
 
-  return (
+  return isGameOver ? (
+    <div className={`${wrong > 0 ? 'success' : 'failure'}`}></div>
+  ) : (
     <div className="cards">
       <p>{currentCategory?.categoryName}</p>
+      <div className="rating">
+        {answers.map((answer, index) => (
+          <div className={answer} key={index}></div>
+        ))}
+      </div>
       <div className="cards__row">
         {currentCategory?.cards.map((card, index) => (
           <Card
