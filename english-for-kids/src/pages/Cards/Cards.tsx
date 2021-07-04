@@ -41,10 +41,12 @@ const Cards: React.FC = () => {
     if (gameStarted) {
       if (correct > 0 && correct < gameCards.length) setAnswers((prev) => [...prev, 'correct']);
       if (gameCards.length === correct) {
-        setIsGameOver(true);
-        if (wrong > 0) playAudio(gameLooseSound);
-        else playAudio(gameWinSound);
-        delay(4000).then(() => history.push('/'));
+        delay(1000).then(() => {
+          setIsGameOver(true);
+          if (wrong > 0) playAudio(gameLooseSound);
+          else playAudio(gameWinSound);
+          delay(4000).then(() => history.push('/'));
+        });
       }
 
       setCurrentCard(gameCards[correct]);

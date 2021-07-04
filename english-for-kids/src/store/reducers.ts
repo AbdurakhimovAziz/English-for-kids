@@ -6,13 +6,11 @@ import { CardsState, GameAction, GameState, GlobalState, IAction } from './types
 const globalReducer = (state: GlobalState = globalInitialState, action: IAction): GlobalState => {
   switch (action.type) {
     case ActionTypes.TOGGLE_MENU:
-      document.body.classList.toggle('locked');
       return {
         ...state,
         isMenuVisible: !state.isMenuVisible
       };
     case ActionTypes.HIDE_MENU:
-      document.body.classList.remove('locked');
       return {
         ...state,
         isMenuVisible: false
@@ -66,8 +64,6 @@ const gameReducer = (state: GameState = gameInitialState, action: GameAction): G
         gameStarted: true
       };
     case ActionTypes.STOP_GAME:
-      console.log('stop');
-
       return gameInitialState;
     case ActionTypes.SET_GAME_CARDS:
       return action.cards
