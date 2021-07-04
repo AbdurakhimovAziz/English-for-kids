@@ -12,23 +12,24 @@ interface PropTypes {
   word: string;
   translation: string;
   audioSrc: string;
+  soundPlaying: boolean;
 }
 
 const ROTATE_CLASS = 'rotate';
 const CORRECT_CLASS = 'correct';
 
-const Card: React.FC<PropTypes> = ({ imgSrc, word, translation, audioSrc }) => {
+const Card: React.FC<PropTypes> = ({ imgSrc, word, translation, audioSrc, soundPlaying }) => {
   const { isPlayMode } = useTypeSelector((state) => state.global);
   const { currentCard, gameStarted } = useTypeSelector((state) => state.game);
   const { addCorrectMove, addWrongMove } = useActions();
 
   const card = useRef<HTMLDivElement>(null);
   const clickHandler = () => {
-    if (gameStarted) {
+    if (gameStarted && !soundPlaying) {
       if (currentCard?.word === word) {
         console.log('correct');
         playAudio(correctSound);
-        delay(1000).then(() => addCorrectMove());
+        addCorrectMove();
         card.current?.classList.add(CORRECT_CLASS);
       } else {
         playAudio(wrongSound);

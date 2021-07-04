@@ -6,9 +6,9 @@ import useActions from '../../hooks/useActions';
 import useTypeSelector from '../../hooks/useTypeSelector';
 import playAudio from '../../shared/playAudio';
 import './cards.scss';
-import happy from '../../assets/happy.svg';
-import sad from '../../assets/sad.svg';
 import delay from '../../shared/delay';
+import gameWinSound from '../../assets/game-win.mp3';
+import gameLooseSound from '../../assets/game-over.mp3';
 
 const Cards: React.FC = () => {
   const { cardCategories } = useTypeSelector((state) => state.categories);
@@ -18,6 +18,7 @@ const Cards: React.FC = () => {
 
   const [answers, setAnswers] = useState<string[]>([]);
   const [isGameOver, setIsGameOver] = useState(false);
+  const [soundPlaying, setSoundPlaying] = useState(false);
 
   const currentCategory = cardCategories.find((category) => category.categoryName === location.state);
 
@@ -41,7 +42,9 @@ const Cards: React.FC = () => {
       if (correct > 0 && correct < gameCards.length) setAnswers((prev) => [...prev, 'correct']);
       if (gameCards.length === correct) {
         setIsGameOver(true);
-        delay(3000).then(() => history.push('/'));
+        if (wrong > 0) playAudio(gameLooseSound);
+        else playAudio(gameWinSound);
+        delay(4000).then(() => history.push('/'));
       }
 
       setCurrentCard(gameCards[correct]);
@@ -54,13 +57,22 @@ const Cards: React.FC = () => {
 
   useEffect(() => {
     if (gameStarted) {
-      playAudio(`./public/${currentCard?.audioSrc}`);
+      setSoundPlaying(true);
+      delay(2000).then(() => {
+        const audio = playAudio(`./public/${currentCard?.audioSrc}`);
+        if (audio)
+          audio.onended = () => {
+            setSoundPlaying(false);
+          };
+      });
       console.log(currentCard);
     }
   }, [currentCard]);
 
   return isGameOver ? (
-    <div className={`${wrong > 0 ? 'success' : 'failure'}`}></div>
+    <div className={`${wrong > 0 ? 'failure' : 'success'}`}>
+      <h2 className="game-over__text">{wrong > 0 ? `${wrong} errors` : 'Congratulations! You won'}</h2>
+    </div>
   ) : (
     <div className="cards">
       <p>{currentCategory?.categoryName}</p>
@@ -77,6 +89,7 @@ const Cards: React.FC = () => {
             translation={card.translation}
             audioSrc={card.audioSrc}
             key={index}
+            soundPlaying={soundPlaying}
           />
         ))}
       </div>
