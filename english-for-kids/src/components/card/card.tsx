@@ -5,7 +5,8 @@ import useTypeSelector from '../../hooks/useTypeSelector';
 import playAudio from '../../shared/playAudio';
 import correctSound from '../../assets/correct.mp3';
 import wrongSound from '../../assets/error.mp3';
-import delay from '../../shared/delay';
+import changeCardStats from '../../shared/changeCardStats';
+import { CardStatsProps } from '../../shared/constants';
 
 interface PropTypes {
   imgSrc: string;
@@ -22,22 +23,25 @@ const Card: React.FC<PropTypes> = ({ imgSrc, word, translation, audioSrc, soundP
   const { isPlayMode } = useTypeSelector((state) => state.global);
   const { currentCard, gameStarted } = useTypeSelector((state) => state.game);
   const { addCorrectMove, addWrongMove } = useActions();
+  const audio = new Audio(`./public/${audioSrc}`);
 
   const card = useRef<HTMLDivElement>(null);
   const clickHandler = () => {
     if (gameStarted && !soundPlaying) {
       if (currentCard?.word === word) {
-        console.log('correct');
+        changeCardStats(`${currentCard?.word}-${currentCard?.translation}`, CardStatsProps.CORRECT_CLICKS);
         playAudio(correctSound);
         addCorrectMove();
         card.current?.classList.add(CORRECT_CLASS);
       } else {
+        changeCardStats(`${currentCard?.word}-${currentCard?.translation}`, CardStatsProps.WRONG_CLICKS);
         playAudio(wrongSound);
         addWrongMove();
       }
     }
     if (isPlayMode) return;
-    playAudio(`./public/${audioSrc}`);
+    changeCardStats(`${word}-${translation}`, CardStatsProps.CLICKS);
+    audio.play();
   };
 
   useEffect(() => {

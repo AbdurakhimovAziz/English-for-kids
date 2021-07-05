@@ -13,6 +13,9 @@ import gameLooseSound from '../../assets/game-over.mp3';
 const Cards: React.FC = () => {
   const { cardCategories } = useTypeSelector((state) => state.categories);
   const { isPlayMode } = useTypeSelector((state) => state.global);
+  const { currentCard, correct, wrong, gameStarted, gameCards } = useTypeSelector((state) => state.game);
+  const { setCurrentCard, startGame, setGameCards } = useActions();
+
   const location = useLocation();
   const history = useHistory();
 
@@ -21,9 +24,6 @@ const Cards: React.FC = () => {
   const [soundPlaying, setSoundPlaying] = useState(false);
 
   const currentCategory = cardCategories.find((category) => category.categoryName === location.state);
-
-  const { currentCard, correct, wrong, gameStarted, gameCards } = useTypeSelector((state) => state.game);
-  const { setCurrentCard, startGame, setGameCards } = useActions();
 
   const gameHandler: React.MouseEventHandler = async () => {
     if (gameStarted) {
