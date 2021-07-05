@@ -5,10 +5,11 @@ import useTypeSelector from '../../hooks/useTypeSelector';
 import ICardStats from '../../models/ICardStats';
 import Cards from '../../pages/Cards/Cards';
 import Home from '../../pages/Home/Home';
+import Statistics from '../../pages/Statistics/Statistics';
 import Header from '../header/header';
 
 export const App = (): JSX.Element => {
-  const { fetchCards, stopGame } = useActions();
+  const { fetchCards, stopGame, closeMenu } = useActions();
   const { gameStarted } = useTypeSelector((state) => state.game);
   const { cardCategories } = useTypeSelector((state) => state.categories);
   const location = useLocation();
@@ -19,6 +20,7 @@ export const App = (): JSX.Element => {
 
   useEffect(() => {
     if (gameStarted) stopGame();
+    closeMenu();
   }, [location]);
 
   useEffect(() => {
@@ -32,8 +34,8 @@ export const App = (): JSX.Element => {
           correctClicks: 0,
           wrongClicks: 0
         };
-
-        localStorage.setItem(`${card.word}-${card.translation}`, JSON.stringify(cardStats));
+        const key = `${card.word}-${card.translation}`;
+        if (!localStorage.getItem(key)) localStorage.setItem(key, JSON.stringify(cardStats));
       });
     });
   }, [cardCategories]);
@@ -48,6 +50,9 @@ export const App = (): JSX.Element => {
           </Route>
           <Route path="/cards">
             <Cards />
+          </Route>
+          <Route path="/statistics">
+            <Statistics />
           </Route>
         </Switch>
       </main>

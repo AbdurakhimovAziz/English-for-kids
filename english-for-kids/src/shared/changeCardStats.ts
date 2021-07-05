@@ -2,8 +2,6 @@ import ICardStats from '../models/ICardStats';
 import { CardStatsProps } from './constants';
 
 const changeCardStats = (key: string, property: CardStatsProps): void => {
-  console.log(key);
-
   const cardStats: ICardStats = JSON.parse(localStorage.getItem(key) || '');
   if (cardStats) {
     switch (property) {

@@ -1,6 +1,5 @@
 import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import useActions from '../../../hooks/useActions';
 import useTypeSelector from '../../../hooks/useTypeSelector';
 import { CARDS_URL } from '../../../shared/constants';
 import MenuItem from './menu-item';
@@ -8,14 +7,13 @@ import './menu.scss';
 
 const SideNav: React.FC<{ className: string }> = ({ className }) => {
   const { cardCategories } = useTypeSelector((state) => state.categories);
-  const { closeMenu } = useActions();
   const params = useLocation();
 
   return (
     <nav id="sideNav" className={`menu bg-info ${className}`}>
       <ul className="menu__list">
         <MenuItem>
-          <NavLink to="/" className={`menu__link `} onClick={closeMenu} activeClassName="active" exact>
+          <NavLink to="/" className={`menu__link `} activeClassName="active" exact>
             Main
           </NavLink>
         </MenuItem>
@@ -24,7 +22,6 @@ const SideNav: React.FC<{ className: string }> = ({ className }) => {
             <NavLink
               to={{ pathname: CARDS_URL, state: category.categoryName }}
               className={`menu__link `}
-              onClick={closeMenu}
               activeClassName="active"
               isActive={() => params.state === category.categoryName}
               exact
@@ -33,6 +30,11 @@ const SideNav: React.FC<{ className: string }> = ({ className }) => {
             </NavLink>
           </MenuItem>
         ))}
+        <MenuItem>
+          <NavLink to="/statistics" className="menu__link" activeClassName="active">
+            Statistics
+          </NavLink>
+        </MenuItem>
       </ul>
     </nav>
   );

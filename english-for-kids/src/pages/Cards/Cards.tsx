@@ -67,7 +67,6 @@ const Cards: React.FC = () => {
             setSoundPlaying(false);
           };
       });
-      console.log(currentCard);
     }
   }, [currentCard]);
 
