@@ -50,6 +50,8 @@ const Cards: React.FC = () => {
       }
 
       setCurrentCard(gameCards[correct]);
+    } else {
+      setAnswers([]);
     }
   }, [gameStarted, correct]);
 
@@ -76,7 +78,6 @@ const Cards: React.FC = () => {
     </div>
   ) : (
     <div className="cards">
-      <p>{currentCategory?.categoryName}</p>
       <div className="rating">
         {answers.map((answer, index) => (
           <div className={answer} key={index}></div>

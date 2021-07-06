@@ -316,5 +316,111 @@
         "audioSrc": "audio/laugh.mp3"
       }
     ]
+  },
+  {
+    "categoryName": "Fruits",
+    "cards": [
+      {
+        "word": "apple",
+        "translation": "яблоко",
+        "image": "img/apple.png",
+        "audioSrc": "audio/apple.mp3"
+      },
+      {
+        "word": "grapes",
+        "translation": "виноград",
+        "image": "img/grapes.png",
+        "audioSrc": "audio/grapes.mp3"
+      },
+      {
+        "word": "banana",
+        "translation": "банан",
+        "image": "img/banana.png",
+        "audioSrc": "audio/banana.mp3"
+      },
+      {
+        "word": "pineapple",
+        "translation": "ананас",
+        "image": "img/pineapple.png",
+        "audioSrc": "audio/pineapple.mp3"
+      },
+      {
+        "word": "kiwi",
+        "translation": "киви",
+        "image": "img/kiwi.png",
+        "audioSrc": "audio/kiwi.mp3"
+      },
+      {
+        "word": "orange",
+        "translation": "апельсин",
+        "image": "img/orange.png",
+        "audioSrc": "audio/orange.mp3"
+      },
+      {
+        "word": "peach",
+        "translation": "персик",
+        "image": "img/peach.png",
+        "audioSrc": "audio/peach.mp3"
+      },
+      {
+        "word": "mango",
+        "translation": "манго",
+        "image": "img/mango.png",
+        "audioSrc": "audio/mango.mp3"
+      }
+    ]
+  },
+  {
+    "categoryName": "Accessories",
+    "cards": [
+      {
+        "word": "belt",
+        "translation": "ремень",
+        "image": "img/belt.png",
+        "audioSrc": "audio/belt.mp3"
+      },
+      {
+        "word": "cap",
+        "translation": "кепка",
+        "image": "img/cap.png",
+        "audioSrc": "audio/cap.mp3"
+      },
+      {
+        "word": "gloves",
+        "translation": "перчатки",
+        "image": "img/gloves.png",
+        "audioSrc": "audio/gloves.mp3"
+      },
+      {
+        "word": "tie",
+        "translation": "галстук",
+        "image": "img/tie.png",
+        "audioSrc": "audio/tie.mp3"
+      },
+      {
+        "word": "watch",
+        "translation": "часы",
+        "image": "img/watch.png",
+        "audioSrc": "audio/watch.mp3"
+      },
+      {
+        "word": "socks",
+        "translation": "носки",
+        "image": "img/socks.png",
+        "audioSrc": "audio/socks.mp3"
+      },
+      {
+        "word": "scarf",
+        "translation": "шарф",
+        "image": "img/scarf.png",
+        "audioSrc": "audio/scarf.mp3"
+      },
+      {
+        "word": "ring",
+        "translation": "кольцо",
+        "image": "img/ring.png",
+        "audioSrc": "audio/ring.mp3"
+      }
+    ]
   }
 ]

@@ -1,14 +1,7 @@
 import React from 'react';
 import ICardStats from '../../models/ICardStats';
 
-const StatsTable: React.FC = () => {
-  const keys = Object.keys(localStorage);
-  const cardStatsArr: ICardStats[] = keys.reduce<ICardStats[]>((acc, key) => {
-    const word: ICardStats = JSON.parse(localStorage.getItem(key) || '');
-    acc.push(word);
-    return acc;
-  }, []);
-
+const StatsTable: React.FC<{ cardStatsArr: ICardStats[] }> = ({ cardStatsArr }) => {
   return (
     <table>
       <thead>

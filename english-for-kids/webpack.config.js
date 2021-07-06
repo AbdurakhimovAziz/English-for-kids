@@ -29,8 +29,7 @@ module.exports = ({ development }) => ({
   output: {
     filename: '[name].[contenthash].js',
     path: path.resolve(__dirname, 'dist'),
-    assetModuleFilename: 'assets/[hash][ext]',
-    publicPath: '/'
+    assetModuleFilename: 'assets/[hash][ext]'
   },
   module: {
     rules: [
