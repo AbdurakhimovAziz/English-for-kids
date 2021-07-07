@@ -32,7 +32,8 @@ export const App = (): JSX.Element => {
           category: category.categoryName,
           clicks: 0,
           correctClicks: 0,
-          wrongClicks: 0
+          wrongClicks: 0,
+          error: 0
         };
         const key = `${card.word}-${card.translation}`;
         if (!localStorage.getItem(key)) localStorage.setItem(key, JSON.stringify(cardStats));

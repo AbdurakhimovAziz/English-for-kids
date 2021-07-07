@@ -11,7 +11,6 @@ const Home: React.FC = () => {
   return (
     <>
       <div className="container">
-        <h1>Categories</h1>
         <div className={`categories cards__row ${isPlayMode ? 'play-mode' : ''}`}>
           {cardCategories.map((category, index) => (
             <NavLink

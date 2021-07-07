@@ -4,9 +4,10 @@ interface ICardStats {
   word: string;
   translation: string;
   category: string;
-  [CardStatsProps.CLICKS]: number;
-  [CardStatsProps.CORRECT_CLICKS]: number;
-  [CardStatsProps.WRONG_CLICKS]: number;
+  [CardStatsProps.clicks]: number;
+  [CardStatsProps.correctClicks]: number;
+  [CardStatsProps.wrongClicks]: number;
+  [CardStatsProps.error]: number;
 }
 
 export default ICardStats;

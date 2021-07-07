@@ -1,26 +1,35 @@
 .menu {
-  height: 100%;
-  width: 300px;
   position: fixed;
   top: 0;
   left: -130%;
+  height: 100%;
+  width: 300px;
+  padding: 0 20px;
   z-index: 2;
   background: linear-gradient(to right, #67b26f, #4ca2cd);
   overflow-x: hidden;
-  padding-top: 10%;
+  padding-top: 90px;
   transition: 0.5s left;
+  &__list {
+    display: flex;
+    flex-direction: column;
+  }
   &__list-item {
-    padding: 8px 8px 8px 32px;
+    display: inline-block;
+    margin-bottom: 5px;
   }
   &__link {
+    position: relative;
+    display: block;
+    padding: 10px;
+    border-radius: 10px;
     text-decoration: none;
     font-size: 25px;
-    color: white;
-    display: block;
-    transition: 0.3s color;
+    color: #fff;
+    transition: background-color 0.3s;
     &:hover,
     &.active {
-      color: #f1f1f1;
+      background-color: rgba(0, 0, 0, 0.2);
     }
   }
   &.active {

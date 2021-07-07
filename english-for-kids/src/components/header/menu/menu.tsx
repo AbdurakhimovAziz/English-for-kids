@@ -13,7 +13,7 @@ const SideNav: React.FC<{ className: string }> = ({ className }) => {
     <nav id="sideNav" className={`menu bg-info ${className}`}>
       <ul className="menu__list">
         <MenuItem>
-          <NavLink to="/" className={`menu__link `} activeClassName="active" exact>
+          <NavLink to="/" className={`menu__link `} activeClassName="active" exact data-hover="Main">
             Main
           </NavLink>
         </MenuItem>
@@ -25,13 +25,14 @@ const SideNav: React.FC<{ className: string }> = ({ className }) => {
               activeClassName="active"
               isActive={() => params.state === category.categoryName}
               exact
+              data-hover={category.categoryName}
             >
               {category.categoryName}
             </NavLink>
           </MenuItem>
         ))}
         <MenuItem>
-          <NavLink to="/statistics" className="menu__link" activeClassName="active">
+          <NavLink to="/statistics" className="menu__link" activeClassName="active" data-hover="Statistics">
             Statistics
           </NavLink>
         </MenuItem>

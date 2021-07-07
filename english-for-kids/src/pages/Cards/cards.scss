@@ -164,3 +164,11 @@
 .failure {
   background-image: url('../../assets/sad.svg');
 }
+
+.game-over__text {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 500;
+  margin-bottom: 20px;
+  color: #ff4e50;
+}

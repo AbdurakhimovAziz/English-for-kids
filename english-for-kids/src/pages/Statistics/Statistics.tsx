@@ -12,12 +12,11 @@ const Statistics: React.FC = () => {
       return acc;
     }, [])
   );
-  // const cardStatsArr: ICardStats[] =
   const resetStats = () => {
     setCardStatsArr((prev) =>
       prev.map<ICardStats>((_, index) => {
         const currStats = JSON.parse(localStorage.getItem(keys[index]) || '');
-        const newStats = { ...currStats, correctClicks: 0, clicks: 0, wrongClicks: 0 };
+        const newStats: ICardStats = { ...currStats, correctClicks: 0, clicks: 0, wrongClicks: 0, error: 0 };
         localStorage.setItem(keys[index], JSON.stringify(newStats));
         return newStats;
       })
@@ -25,10 +24,14 @@ const Statistics: React.FC = () => {
   };
 
   return (
-    <div className="statistics">
+    <div className="stats">
       <div className="container">
-        <button onClick={resetStats}>reset</button>
-        <button>train difficult</button>
+        <div className="stats__btns">
+          <button className="btn btn-reset stats__btn" onClick={resetStats}>
+            reset
+          </button>
+          <button className="btn btn-train stats__btn">train difficult</button>
+        </div>
         <StatsTable cardStatsArr={cardStatsArr} />
       </div>
     </div>

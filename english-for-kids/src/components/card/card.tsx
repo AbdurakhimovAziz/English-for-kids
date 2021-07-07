@@ -29,18 +29,18 @@ const Card: React.FC<PropTypes> = ({ imgSrc, word, translation, audioSrc, soundP
   const clickHandler = () => {
     if (gameStarted && !soundPlaying) {
       if (currentCard?.word === word) {
-        changeCardStats(`${currentCard?.word}-${currentCard?.translation}`, CardStatsProps.CORRECT_CLICKS);
+        changeCardStats(`${currentCard?.word}-${currentCard?.translation}`, CardStatsProps.correctClicks);
         playAudio(correctSound);
         addCorrectMove();
         card.current?.classList.add(CORRECT_CLASS);
       } else {
-        changeCardStats(`${currentCard?.word}-${currentCard?.translation}`, CardStatsProps.WRONG_CLICKS);
+        changeCardStats(`${currentCard?.word}-${currentCard?.translation}`, CardStatsProps.wrongClicks);
         playAudio(wrongSound);
         addWrongMove();
       }
     }
     if (isPlayMode) return;
-    changeCardStats(`${word}-${translation}`, CardStatsProps.CLICKS);
+    changeCardStats(`${word}-${translation}`, CardStatsProps.clicks);
     audio.play();
   };
 
@@ -49,14 +49,7 @@ const Card: React.FC<PropTypes> = ({ imgSrc, word, translation, audioSrc, soundP
   }, [gameStarted]);
 
   return (
-    <div
-      className="cards__card"
-      ref={card}
-      onMouseLeave={(e) => {
-        e.stopPropagation();
-        card.current?.classList.remove(ROTATE_CLASS);
-      }}
-    >
+    <div className="cards__card" ref={card} onMouseLeave={() => card.current?.classList.remove(ROTATE_CLASS)}>
       <div className="card__front card" onClick={clickHandler}>
         <div className={`cards__card-img ${isPlayMode ? 'img--cover' : ''}`}>
           <img src={`./public/${imgSrc}`} alt={word} />
