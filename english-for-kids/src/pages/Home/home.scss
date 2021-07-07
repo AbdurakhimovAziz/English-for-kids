@@ -21,8 +21,8 @@
     width: 60%;
     height: 60%;
     border-radius: 50%;
-    background-color: cyan;
     box-shadow: 0 0 0 14px #fff;
+    background-color: #fff;
     transform: scale(0.9);
     img {
       width: 100%;
@@ -36,12 +36,19 @@
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    background-color: #1369ce;
+    background: linear-gradient(to right, #00c9ff, #92fe9d);
     position: absolute;
     bottom: 135%;
     right: 0;
     left: 0;
     opacity: 0.9;
     transform: scale(3);
+    transition: background-color 0.2s;
+  }
+}
+
+.categories.play-mode {
+  .categories__card::before {
+    background: linear-gradient(to right, #ff4e50, #f9d423);
   }
 }

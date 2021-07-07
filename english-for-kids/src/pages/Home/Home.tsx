@@ -6,12 +6,13 @@ import './home.scss';
 
 const Home: React.FC = () => {
   const { cardCategories } = useTypeSelector((state) => state.categories);
+  const { isPlayMode } = useTypeSelector((state) => state.global);
 
   return (
     <>
       <div className="container">
         <h1>Categories</h1>
-        <div className="categories cards__row">
+        <div className={`categories cards__row ${isPlayMode ? 'play-mode' : ''}`}>
           {cardCategories.map((category, index) => (
             <NavLink
               className="categories__card card"

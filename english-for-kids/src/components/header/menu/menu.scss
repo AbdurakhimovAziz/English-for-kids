@@ -5,15 +5,17 @@
   top: 0;
   left: -130%;
   z-index: 2;
-  background-color: #1369ce;
+  background: linear-gradient(to right, #67b26f, #4ca2cd);
   overflow-x: hidden;
-  padding-top: 60px;
+  padding-top: 10%;
   transition: 0.5s left;
-  &__link {
+  &__list-item {
     padding: 8px 8px 8px 32px;
+  }
+  &__link {
     text-decoration: none;
     font-size: 25px;
-    color: #818181;
+    color: white;
     display: block;
     transition: 0.3s color;
     &:hover,
