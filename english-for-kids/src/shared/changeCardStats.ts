@@ -18,7 +18,7 @@ const changeCardStats = (key: string, property: CardStatsProps): void => {
         break;
     }
     const totalClicks = cardStats.wrongClicks + cardStats.correctClicks;
-    cardStats.error = totalClicks > 0 ? +(Math.round(cardStats.correctClicks / totalClicks) * 100) : 0;
+    cardStats.error = totalClicks > 0 ? Math.round((cardStats.correctClicks / totalClicks) * 100) : 0;
 
     localStorage.setItem(key, JSON.stringify(cardStats));
   }
