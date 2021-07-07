@@ -6,6 +6,7 @@ import ICardStats from '../../models/ICardStats';
 import Cards from '../../pages/Cards/Cards';
 import Home from '../../pages/Home/Home';
 import Statistics from '../../pages/Statistics/Statistics';
+import Footer from '../footer/footer';
 import Header from '../header/header';
 
 export const App = (): JSX.Element => {
@@ -57,6 +58,7 @@ export const App = (): JSX.Element => {
           </Route>
         </Switch>
       </main>
+      <Footer />
     </>
   );
 };

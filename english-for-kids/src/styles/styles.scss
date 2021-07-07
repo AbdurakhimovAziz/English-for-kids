@@ -35,3 +35,55 @@ body.locked {
 .main {
   padding: 20px 0;
 }
+
+.footer {
+  background-color: #fefefe;
+  border-top: 1px solid grey;
+  &__body {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .github {
+    display: block;
+    width: 120px;
+    height: 45px;
+    padding-left: 45px;
+    background-image: url('../assets/github.svg');
+    background-size: 35px;
+    background-repeat: no-repeat;
+    background-position: left center;
+    line-height: 45px;
+    font-size: 16px;
+    color: #333;
+    transition: 0.3s;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  .rss {
+    display: block;
+    position: relative;
+    width: 86px;
+    height: 32px;
+    background-image: url('../assets/rs.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: left center;
+    padding-right: 111px;
+    &-year {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      font-size: 21px;
+      color: #333;
+      line-height: 0.9;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    &:hover .rss-year {
+      right: -5px;
+      letter-spacing: 2px;
+    }
+  }
+}
