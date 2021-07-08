@@ -7,5 +7,5 @@ export enum CardStatsProps {
   clicks = 'clicks',
   correctClicks = 'correctClicks',
   wrongClicks = 'wrongClicks',
-  error = 'error'
+  correctPersent = 'correctPersent'
 }

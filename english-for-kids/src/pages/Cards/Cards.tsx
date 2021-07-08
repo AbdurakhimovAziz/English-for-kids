@@ -9,9 +9,9 @@ import './cards.scss';
 import delay from '../../shared/delay';
 import gameWinSound from '../../assets/game-win.mp3';
 import gameLooseSound from '../../assets/game-over.mp3';
+import { ICard } from '../../models/ICard';
 
 const Cards: React.FC = () => {
-  const { cardCategories } = useTypeSelector((state) => state.categories);
   const { isPlayMode } = useTypeSelector((state) => state.global);
   const { currentCard, correct, wrong, gameStarted, gameCards } = useTypeSelector((state) => state.game);
   const { setCurrentCard, startGame, setGameCards } = useActions();
@@ -23,13 +23,13 @@ const Cards: React.FC = () => {
   const [isGameOver, setIsGameOver] = useState(false);
   const [soundPlaying, setSoundPlaying] = useState(false);
 
-  const currentCategory = cardCategories.find((category) => category.categoryName === location.state);
+  const currentCards = location.state as ICard[];
 
   const gameHandler: React.MouseEventHandler = async () => {
     if (gameStarted) {
       playAudio(`./public/${currentCard?.audioSrc}`);
     } else {
-      const cards = currentCategory?.cards.slice().sort(() => Math.random() - 0.5);
+      const cards = currentCards?.slice().sort(() => Math.random() - 0.5);
       if (cards) {
         setGameCards(cards);
         startGame();
@@ -72,9 +72,11 @@ const Cards: React.FC = () => {
     }
   }, [currentCard]);
 
+  if (currentCards.length === 0) return <div className="empty">No cards to display</div>;
+
   return isGameOver ? (
     <div className={`${wrong > 0 ? 'failure' : 'success'}`}>
-      <h2 className="game-over__text">{wrong > 0 ? `${wrong} errors` : 'Congratulations! You won'}</h2>
+      <h2 className="game-over__text">{wrong > 0 ? `${wrong} error(s)` : 'Congratulations! You won'}</h2>
     </div>
   ) : (
     <div className="cards">
@@ -84,7 +86,7 @@ const Cards: React.FC = () => {
         ))}
       </div>
       <div className="cards__row">
-        {currentCategory?.cards.map((card, index) => (
+        {currentCards?.map((card, index) => (
           <Card
             imgSrc={card.image}
             word={card.word}

@@ -6,10 +6,6 @@ import { App } from './components/app/App';
 import store from './store/store';
 import './styles/styles.scss';
 
-store.subscribe(() => {
-  console.log(store.getState());
-});
-
 ReactDOM.render(
   <Provider store={store}>
     <Router>

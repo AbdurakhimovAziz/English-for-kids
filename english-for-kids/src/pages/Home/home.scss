@@ -46,6 +46,20 @@
     transform: scale(3);
     transition: background-color 0.2s;
   }
+  @media screen and (max-width: 768px) {
+    max-width: 250px;
+    height: 250px;
+    &-title {
+      font-size: 26px;
+    }
+  }
+  @media screen and (max-width: 585px) {
+    max-width: 200px;
+    height: 200px;
+    &-title {
+      font-size: 20px;
+    }
+  }
 }
 
 .categories.play-mode {

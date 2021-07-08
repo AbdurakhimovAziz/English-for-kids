@@ -35,7 +35,7 @@ const StatsTable: React.FC<{ cardStatsArr: ICardStats[] }> = ({ cardStatsArr }) 
             <th onClick={(e) => clickHandler(e, CardStatsProps.clicks)}>Clicks</th>
             <th onClick={(e) => clickHandler(e, CardStatsProps.correctClicks)}>Correct clicks</th>
             <th onClick={(e) => clickHandler(e, CardStatsProps.wrongClicks)}>Wrong clicks</th>
-            <th onClick={(e) => clickHandler(e, CardStatsProps.error)}>error (%)</th>
+            <th onClick={(e) => clickHandler(e, CardStatsProps.correctPersent)}>correct (%)</th>
           </tr>
         </thead>
         <tbody>
@@ -54,7 +54,7 @@ const StatsTable: React.FC<{ cardStatsArr: ICardStats[] }> = ({ cardStatsArr }) 
                   <td>{card.clicks}</td>
                   <td>{card.correctClicks}</td>
                   <td>{card.wrongClicks}</td>
-                  <td>{card.error}%</td>
+                  <td>{card.correctPersent}%</td>
                 </tr>
               );
             })}

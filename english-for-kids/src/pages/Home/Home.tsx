@@ -13,11 +13,7 @@ const Home: React.FC = () => {
       <div className="container">
         <div className={`categories cards__row ${isPlayMode ? 'play-mode' : ''}`}>
           {cardCategories.map((category, index) => (
-            <NavLink
-              className="categories__card card"
-              to={{ pathname: CARDS_URL, state: category.categoryName }}
-              key={index}
-            >
+            <NavLink className="categories__card card" to={{ pathname: CARDS_URL, state: category.cards }} key={index}>
               <div className="categories__card-img">
                 <img src={`./public/${category.cards[0].image}`} />
               </div>

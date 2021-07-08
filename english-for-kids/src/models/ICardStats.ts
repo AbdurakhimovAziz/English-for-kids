@@ -7,7 +7,7 @@ interface ICardStats {
   [CardStatsProps.clicks]: number;
   [CardStatsProps.correctClicks]: number;
   [CardStatsProps.wrongClicks]: number;
-  [CardStatsProps.error]: number;
+  [CardStatsProps.correctPersent]: number;
 }
 
 export default ICardStats;

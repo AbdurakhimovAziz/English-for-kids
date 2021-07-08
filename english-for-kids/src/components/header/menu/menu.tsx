@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import useTypeSelector from '../../../hooks/useTypeSelector';
+import { ICard } from '../../../models/ICard';
 import { CARDS_URL } from '../../../shared/constants';
 import MenuItem from './menu-item';
 import './menu.scss';
@@ -20,10 +21,10 @@ const SideNav: React.FC<{ className: string }> = ({ className }) => {
         {cardCategories.map((category, index) => (
           <MenuItem key={index + 1}>
             <NavLink
-              to={{ pathname: CARDS_URL, state: category.categoryName }}
+              to={{ pathname: CARDS_URL, state: category.cards }}
               className={`menu__link `}
               activeClassName="active"
-              isActive={() => params.state === category.categoryName}
+              isActive={() => (params.state ? (params.state as ICard[])[0].word === category.cards[0].word : false)}
               exact
               data-hover={category.categoryName}
             >
