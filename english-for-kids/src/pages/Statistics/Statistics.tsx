@@ -39,6 +39,7 @@ const Statistics: React.FC = () => {
       ?.cards.find((card) => card.translation === word.translation)
   );
   cards = cards.length < 9 ? cards : cards.slice(0, 8);
+  console.log(cards);
 
   return (
     <div className="stats">
