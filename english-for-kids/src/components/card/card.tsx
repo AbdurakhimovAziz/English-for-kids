@@ -41,6 +41,7 @@ const Card: React.FC<PropTypes> = ({ imgSrc, word, translation, audioSrc, soundP
     }
     if (isPlayMode) return;
     changeCardStats(`${word}-${translation}`, CardStatsProps.clicks);
+    audio.currentTime = 0;
     audio.play();
   };
 

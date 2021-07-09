@@ -195,6 +195,13 @@
   .correct {
     background-image: url('../../assets/correct.png');
   }
+  @media screen and (max-width: 500px) {
+    height: 30px;
+    .wrong,
+    .correct {
+      width: 30px;
+    }
+  }
 }
 
 .success,

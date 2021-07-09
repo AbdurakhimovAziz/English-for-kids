@@ -86,4 +86,17 @@ body.locked {
       letter-spacing: 2px;
     }
   }
+  @media screen and (max-width: 585px) {
+    .github {
+      font-size: 0;
+    }
+    .rss {
+      width: 75px;
+      height: 20px;
+      padding-right: 75px;
+      &-year {
+        font-size: 18px;
+      }
+    }
+  }
 }
