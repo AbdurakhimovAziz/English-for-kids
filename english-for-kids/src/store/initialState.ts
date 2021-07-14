@@ -1,8 +1,11 @@
+import getToken from '../hooks/useToken';
+import IToken from '../models/IToken';
 import { CardsState, GameState, GlobalState } from './types';
 
 export const globalInitialState: GlobalState = {
   isMenuVisible: false,
-  isPlayMode: false
+  isPlayMode: false,
+  token: getToken()
 };
 
 export const cardsInitialState: CardsState = {

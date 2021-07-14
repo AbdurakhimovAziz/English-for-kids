@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Switch, Route, useLocation } from 'react-router-dom';
 import useActions from '../../hooks/useActions';
+import useToken from '../../hooks/useToken';
 import useTypeSelector from '../../hooks/useTypeSelector';
 import ICardStats from '../../models/ICardStats';
 import Cards from '../../pages/Cards/Cards';
@@ -12,6 +13,7 @@ import Header from '../header/header';
 export const App = (): JSX.Element => {
   const { fetchCards, stopGame, closeMenu } = useActions();
   const { gameStarted } = useTypeSelector((state) => state.game);
+  const { token } = useTypeSelector((state) => state.global);
   const { cardCategories } = useTypeSelector((state) => state.categories);
   const location = useLocation();
 
@@ -41,6 +43,21 @@ export const App = (): JSX.Element => {
       });
     });
   }, [cardCategories]);
+
+  if (token) {
+    console.log(token);
+
+    return (
+      <main className="main">
+        <Switch>
+          <Route path="/" exact>
+            admin
+          </Route>
+          <Route path="/words"> words</Route>
+        </Switch>
+      </main>
+    );
+  }
 
   return (
     <>

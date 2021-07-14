@@ -14,7 +14,7 @@ const Statistics: React.FC = () => {
   const [cardStatsArr, setCardStatsArr] = useState<ICardStats[]>(
     keys.reduce<ICardStats[]>((acc, key) => {
       const word: ICardStats = JSON.parse(localStorage.getItem(key) || '');
-      acc.push(word);
+      if (word.word) acc.push(word);
       return acc;
     }, [])
   );

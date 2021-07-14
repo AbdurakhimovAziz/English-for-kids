@@ -1,8 +1,9 @@
 import { Dispatch } from 'react';
 import { ICard } from '../models/ICard';
 import { ICategory } from '../models/ICategory';
+import IToken from '../models/IToken';
 import ActionTypes from './actionTypes';
-import { GameAction, IAction } from './types';
+import { IAction } from './types';
 
 export const toggleMenu = (): IAction => {
   return {
@@ -33,42 +34,50 @@ export const fetchCards = () => {
   };
 };
 
-export const addCorrectMove = (): GameAction => {
+export const addCorrectMove = (): IAction => {
   return {
     type: ActionTypes.ADD_CORRECT
   };
 };
 
-export const addWrongMove = (): GameAction => {
+export const addWrongMove = (): IAction => {
   return {
     type: ActionTypes.ADD_WRONG
   };
 };
 
 export const setCurrentCard = (card: ICard) => {
-  return async (dispatch: Dispatch<GameAction>): Promise<void> => {
+  return async (dispatch: Dispatch<IAction>): Promise<void> => {
     dispatch({
       type: ActionTypes.SET_CURRENT_CARD,
-      card
+      data: card
     });
   };
 };
 
-export const setGameCards = (cards: ICard[]): GameAction => {
+export const setGameCards = (cards: ICard[]): IAction => {
   return {
     type: ActionTypes.SET_GAME_CARDS,
-    cards
+    data: cards
   };
 };
 
-export const startGame = (): GameAction => {
+export const startGame = (): IAction => {
   return {
     type: ActionTypes.START_GAME
   };
 };
 
-export const stopGame = (): GameAction => {
+export const stopGame = (): IAction => {
   return {
     type: ActionTypes.STOP_GAME
+  };
+};
+
+export const setToken = (userToken: IToken): IAction => {
+  localStorage.setItem('token', JSON.stringify(userToken));
+  return {
+    type: ActionTypes.SET_TOKEN,
+    data: userToken.token
   };
 };

@@ -8,7 +8,8 @@ enum ActionTypes {
   SET_CURRENT_CARD = 'SET_CURRENT_CARD',
   SET_GAME_CARDS = 'SET_GAME_CARDS',
   ADD_CORRECT = 'ADD_CORRECT',
-  ADD_WRONG = 'ADD_WRONG'
+  ADD_WRONG = 'ADD_WRONG',
+  SET_TOKEN = 'SET_TOKEN'
 }
 
 export default ActionTypes;

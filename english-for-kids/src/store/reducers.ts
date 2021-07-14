@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import ActionTypes from './actionTypes';
 import { cardsInitialState, gameInitialState, globalInitialState } from './initialState';
-import { CardsState, GameAction, GameState, GlobalState, IAction } from './types';
+import { CardsState, GameState, GlobalState, IAction } from './types';
 
 const globalReducer = (state: GlobalState = globalInitialState, action: IAction): GlobalState => {
   switch (action.type) {
@@ -19,6 +19,11 @@ const globalReducer = (state: GlobalState = globalInitialState, action: IAction)
       return {
         ...state,
         isPlayMode: !state.isPlayMode
+      };
+    case ActionTypes.SET_TOKEN:
+      return {
+        ...state,
+        token: action.data || ''
       };
     default:
       return state;
@@ -39,7 +44,7 @@ const categoriesReducer = (state: CardsState = cardsInitialState, action: IActio
   }
 };
 
-const gameReducer = (state: GameState = gameInitialState, action: GameAction): GameState => {
+const gameReducer = (state: GameState = gameInitialState, action: IAction): GameState => {
   switch (action.type) {
     case ActionTypes.ADD_CORRECT:
       return {
@@ -52,10 +57,10 @@ const gameReducer = (state: GameState = gameInitialState, action: GameAction): G
         wrong: ++state.wrong
       };
     case ActionTypes.SET_CURRENT_CARD:
-      return action.card
+      return action.data
         ? {
             ...state,
-            currentCard: action.card
+            currentCard: action.data
           }
         : state;
     case ActionTypes.START_GAME:
@@ -66,10 +71,10 @@ const gameReducer = (state: GameState = gameInitialState, action: GameAction): G
     case ActionTypes.STOP_GAME:
       return gameInitialState;
     case ActionTypes.SET_GAME_CARDS:
-      return action.cards
+      return action.data
         ? {
             ...state,
-            gameCards: action.cards
+            gameCards: action.data
           }
         : state;
     default:

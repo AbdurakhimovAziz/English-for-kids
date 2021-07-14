@@ -1,15 +1,4 @@
 .menu {
-  position: fixed;
-  top: 0;
-  left: -130%;
-  height: 100%;
-  width: 300px;
-  padding: 0 20px;
-  z-index: 2;
-  background: linear-gradient(to right, #67b26f, #4ca2cd);
-  overflow-x: hidden;
-  padding-top: 90px;
-  transition: 0.5s left;
   &__list {
     display: flex;
     flex-direction: column;
@@ -32,12 +21,29 @@
       background-color: rgba(0, 0, 0, 0.2);
     }
   }
-  &.active {
-    left: 0;
-  }
+  // &.active {
+  //   left: 0;
+  // }
   @media screen and (max-width: 576px) {
     &__link {
       font-size: 18px;
     }
+  }
+}
+
+.side-menu {
+  position: fixed;
+  top: 0;
+  left: -130%;
+  height: 100%;
+  width: 300px;
+  padding: 0 20px;
+  z-index: 2;
+  background: linear-gradient(to right, #67b26f, #4ca2cd);
+  overflow-x: hidden;
+  padding-top: 90px;
+  transition: 0.5s left;
+  &.active {
+    left: 0;
   }
 }

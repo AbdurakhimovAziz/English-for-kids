@@ -9,3 +9,5 @@ export enum CardStatsProps {
   wrongClicks = 'wrongClicks',
   correctPersent = 'correctPersent'
 }
+
+export const SERVER_URL = 'http://localhost:3000';

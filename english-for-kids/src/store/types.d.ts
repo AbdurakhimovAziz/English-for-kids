@@ -3,13 +3,7 @@ import { ICategory } from '../models/ICategory';
 
 type IAction = {
   type: string;
-  data?: ICategory[];
-};
-
-type GameAction = {
-  type: string;
-  card?: ICard;
-  cards?: ICard[];
+  data?: any;
 };
 
 type CardsState = {
@@ -19,6 +13,7 @@ type CardsState = {
 type GlobalState = {
   isMenuVisible: boolean;
   isPlayMode: boolean;
+  token: string | null;
 };
 
 type GameState = {
