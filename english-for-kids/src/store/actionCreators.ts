@@ -2,6 +2,7 @@ import { Dispatch } from 'react';
 import { ICard } from '../models/ICard';
 import { ICategory } from '../models/ICategory';
 import IToken from '../models/IToken';
+import { SERVER_URL } from '../shared/constants';
 import ActionTypes from './actionTypes';
 import { IAction } from './types';
 
@@ -25,7 +26,7 @@ export const toggleAppMode = (): IAction => {
 export const fetchCards = () => {
   return async (dispatch: Dispatch<IAction>): Promise<void> => {
     try {
-      const response = await fetch('./public/cards.json');
+      const response = await fetch(`${SERVER_URL}/`);
       const data: ICategory[] = await response.json();
       dispatch({ type: ActionTypes.FETCH_CARDS, data });
     } catch (e) {

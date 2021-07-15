@@ -36,6 +36,16 @@ body.locked {
   padding: 20px 0;
 }
 
+.btn--green {
+  min-width: 100px;
+  padding: 10px;
+  background-color: transparent;
+  border: 1px solid limegreen;
+  color: black;
+  font: unset;
+  text-align: center;
+}
+
 .footer {
   background-color: #fefefe;
   border-top: 1px solid grey;

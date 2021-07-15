@@ -1,6 +1,6 @@
 import IToken from '../models/IToken';
 
-const getToken = () => {
+const getToken = (): string | null => {
   const tokenString = localStorage.getItem('token') || '';
   if (!tokenString) return null;
   const userToken: IToken = JSON.parse(tokenString);

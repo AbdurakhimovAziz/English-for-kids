@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
 import useActions from '../../hooks/useActions';
-import useToken from '../../hooks/useToken';
-import IUser from '../../models/IUser';
-import { SERVER_URL } from '../../shared/constants';
 import loginUser from '../../shared/loginUser';
 import './login.scss';
 

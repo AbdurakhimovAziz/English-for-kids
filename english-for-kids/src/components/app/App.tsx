@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react';
-import { Switch, Route, useLocation } from 'react-router-dom';
+import { Switch, Route, useLocation, Redirect } from 'react-router-dom';
 import useActions from '../../hooks/useActions';
-import useToken from '../../hooks/useToken';
 import useTypeSelector from '../../hooks/useTypeSelector';
 import ICardStats from '../../models/ICardStats';
+import AdminCategories from '../../pages/admin/categories/admin-categories';
+import Words from '../../pages/admin/words/words';
 import Cards from '../../pages/Cards/Cards';
 import Home from '../../pages/Home/Home';
 import Statistics from '../../pages/Statistics/Statistics';
+import AdminHeader from '../adminHeader/adminHeader';
 import Footer from '../footer/footer';
 import Header from '../header/header';
 
@@ -45,17 +47,22 @@ export const App = (): JSX.Element => {
   }, [cardCategories]);
 
   if (token) {
-    console.log(token);
-
     return (
-      <main className="main">
-        <Switch>
-          <Route path="/" exact>
-            admin
-          </Route>
-          <Route path="/words"> words</Route>
-        </Switch>
-      </main>
+      <>
+        <AdminHeader />
+        <main className="main">
+          <Switch>
+            <Route path="/" exact>
+              admin
+              <AdminCategories />
+            </Route>
+            <Route path="/:category/words">
+              <Words />
+            </Route>
+            <Redirect to="/" />
+          </Switch>
+        </main>
+      </>
     );
   }
 
