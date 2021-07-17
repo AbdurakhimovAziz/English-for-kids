@@ -41,6 +41,15 @@
       }
     ]
   },
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx"],
+      "rules": {
+        "@typescript-eslint/naming-convention": "off",
+        "no-underscore-dangle": "off"
+      }
+    }
+  ],
   "settings": {
     "import/resolver": {
       "node": {

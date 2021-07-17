@@ -23,7 +23,7 @@ const Card: React.FC<PropTypes> = ({ imgSrc, word, translation, audioSrc, soundP
   const { isPlayMode } = useTypeSelector((state) => state.global);
   const { currentCard, gameStarted } = useTypeSelector((state) => state.game);
   const { addCorrectMove, addWrongMove } = useActions();
-  const audio = new Audio(`./public/${audioSrc}`);
+  const audio = new Audio(audioSrc);
 
   const card = useRef<HTMLDivElement>(null);
   const clickHandler = () => {
@@ -53,7 +53,7 @@ const Card: React.FC<PropTypes> = ({ imgSrc, word, translation, audioSrc, soundP
     <div className="cards__card" ref={card} onMouseLeave={() => card.current?.classList.remove(ROTATE_CLASS)}>
       <div className="card__front card" onClick={clickHandler}>
         <div className={`cards__card-img ${isPlayMode ? 'img--cover' : ''}`}>
-          <img src={`./public/${imgSrc}`} alt={word} />
+          <img src={imgSrc} alt={word} />
         </div>
         {isPlayMode ? (
           ''
@@ -74,7 +74,7 @@ const Card: React.FC<PropTypes> = ({ imgSrc, word, translation, audioSrc, soundP
       </div>
       <div className="card__back card">
         <div className="cards__card-img">
-          <img src={`./public/${imgSrc}`} alt={translation} />
+          <img src={imgSrc} alt={translation} />
         </div>
         {isPlayMode ? '' : <div className="card__title">{translation}</div>}
       </div>

@@ -27,7 +27,7 @@ const Cards: React.FC = () => {
 
   const gameHandler: React.MouseEventHandler = async () => {
     if (gameStarted) {
-      playAudio(`./public/${currentCard?.audioSrc}`);
+      playAudio(currentCard?.audioSrc);
     } else {
       const cards = currentCards?.slice().sort(() => Math.random() - 0.5);
       if (cards) {
@@ -63,7 +63,7 @@ const Cards: React.FC = () => {
     if (gameStarted) {
       setSoundPlaying(true);
       delay(2000).then(() => {
-        const audio = playAudio(`./public/${currentCard?.audioSrc}`);
+        const audio = playAudio(currentCard?.audioSrc);
         if (audio)
           audio.onended = () => {
             setSoundPlaying(false);

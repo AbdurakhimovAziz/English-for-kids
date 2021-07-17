@@ -23,17 +23,18 @@ export const toggleAppMode = (): IAction => {
   };
 };
 
-export const fetchCards = () => {
-  return async (dispatch: Dispatch<IAction>): Promise<void> => {
+export const fetchCards =
+  () =>
+  async (dispatch: Dispatch<IAction>): Promise<void> => {
     try {
-      const response = await fetch(`${SERVER_URL}/`);
+      const response = await fetch(`${SERVER_URL}/categories`);
       const data: ICategory[] = await response.json();
+
       dispatch({ type: ActionTypes.FETCH_CARDS, data });
     } catch (e) {
       console.log(e);
     }
   };
-};
 
 export const addCorrectMove = (): IAction => {
   return {
@@ -47,12 +48,10 @@ export const addWrongMove = (): IAction => {
   };
 };
 
-export const setCurrentCard = (card: ICard) => {
-  return async (dispatch: Dispatch<IAction>): Promise<void> => {
-    dispatch({
-      type: ActionTypes.SET_CURRENT_CARD,
-      data: card
-    });
+export const setCurrentCard = (card: ICard): IAction => {
+  return {
+    type: ActionTypes.SET_CURRENT_CARD,
+    data: card
   };
 };
 
@@ -82,3 +81,62 @@ export const setToken = (userToken: IToken): IAction => {
     data: userToken.token
   };
 };
+
+export const createCategory =
+  (category: ICategory) =>
+  async (dispatch: Dispatch<IAction>): Promise<void> => {
+    try {
+      const response = await fetch(`${SERVER_URL}/categories/`, {
+        method: 'POST',
+        body: JSON.stringify(category),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      console.log(category);
+
+      const data: ICategory[] = await response.json();
+      console.log(data);
+
+      dispatch({ type: ActionTypes.CREATE_CATEGORY, data });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+export const updateCategory =
+  (id: string, category: ICategory) =>
+  async (dispatch: Dispatch<IAction>): Promise<void> => {
+    try {
+      const response = await fetch(`${SERVER_URL}/categories/${id}`, {
+        method: 'PATCH',
+        body: JSON.stringify(category),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      console.log(category);
+
+      const data: ICategory[] = await response.json();
+      console.log(data);
+
+      dispatch({ type: ActionTypes.UPDATE_CATEGORY, data });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+export const deleteCategory =
+  (id: string) =>
+  async (dispatch: Dispatch<IAction>): Promise<void> => {
+    try {
+      const response = await fetch(`${SERVER_URL}/categories/${id}`, {
+        method: 'DELETE'
+      });
+      console.log(await response.json());
+
+      dispatch({ type: ActionTypes.DELETE_CATEGORY, data: id });
+    } catch (e) {
+      console.log(e);
+    }
+  };

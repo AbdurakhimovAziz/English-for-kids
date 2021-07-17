@@ -39,7 +39,6 @@ const Statistics: React.FC = () => {
       ?.cards.find((card) => card.translation === word.translation)
   );
   cards = cards.length < 9 ? cards : cards.slice(0, 8);
-  console.log(cards);
 
   return (
     <div className="stats">
@@ -49,7 +48,7 @@ const Statistics: React.FC = () => {
             reset
           </button>
           <Link className="btn btn-train stats__btn" to={{ pathname: CARDS_URL, state: cards }}>
-            train difficult
+            Repeat difficult
           </Link>
         </div>
         <StatsTable cardStatsArr={cardStatsArr} />

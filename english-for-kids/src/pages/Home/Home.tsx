@@ -15,7 +15,7 @@ const Home: React.FC = () => {
           {cardCategories.map((category, index) => (
             <NavLink className="categories__card card" to={{ pathname: CARDS_URL, state: category.cards }} key={index}>
               <div className="categories__card-img">
-                <img src={`./public/${category.cards[0].image}`} />
+                <img src={`${category.cards[0]?.image}`} />
               </div>
               <div className="categories__card-title">{category.categoryName}</div>
             </NavLink>

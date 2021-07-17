@@ -39,6 +39,8 @@ const categoriesReducer = (state: CardsState = cardsInitialState, action: IActio
             cardCategories: [...action.data]
           }
         : state;
+    case ActionTypes.UPDATE_CATEGORY:
+      return state;
     default:
       return state;
   }

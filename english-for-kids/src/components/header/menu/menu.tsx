@@ -29,11 +29,7 @@ const SideNav: React.FC<{ className: string }> = ({ className }) => {
                 to={{ pathname: CARDS_URL, state: category.cards }}
                 className={`menu__link `}
                 activeClassName="active"
-                isActive={() =>
-                  params.state && (params.state as ICard[]).length !== 0
-                    ? (params.state as ICard[])[0].word === category.cards[0].word
-                    : false
-                }
+                isActive={() => (params.state ? params.state === category.cards : false)}
                 exact
                 data-hover={category.categoryName}
               >
