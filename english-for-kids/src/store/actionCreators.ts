@@ -93,7 +93,6 @@ export const createCategory =
           'Content-Type': 'application/json'
         }
       });
-      console.log(category);
 
       const data: ICategory[] = await response.json();
       console.log(data);
@@ -136,6 +135,40 @@ export const deleteCategory =
       console.log(await response.json());
 
       dispatch({ type: ActionTypes.DELETE_CATEGORY, data: id });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+export const createWord =
+  (id: string, newWord: ICard) =>
+  async (dispatch: Dispatch<IAction>): Promise<void> => {
+    try {
+      const response = await fetch(`${SERVER_URL}/words/${id}`, {
+        method: 'POST',
+        body: JSON.stringify(newWord),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      const data = await response.json();
+      dispatch({ type: ActionTypes.CREATE_WORD, data, categoryId: id });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+export const deleteWord =
+  (wordId: string, categoryId: string) =>
+  async (dispatch: Dispatch<IAction>): Promise<void> => {
+    try {
+      const response = await fetch(`${SERVER_URL}/words/${wordId}`, {
+        method: 'DELETE'
+      });
+      const data = await response.json();
+      console.log(data);
+
+      dispatch({ type: ActionTypes.DELETE_WORD, data, categoryId });
     } catch (e) {
       console.log(e);
     }

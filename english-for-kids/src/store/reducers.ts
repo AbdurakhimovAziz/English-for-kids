@@ -33,14 +33,37 @@ const globalReducer = (state: GlobalState = globalInitialState, action: IAction)
 const categoriesReducer = (state: CardsState = cardsInitialState, action: IAction): CardsState => {
   switch (action.type) {
     case ActionTypes.FETCH_CARDS:
-      return action.data
-        ? {
-            ...state,
-            cardCategories: [...action.data]
-          }
-        : state;
+      return {
+        ...state,
+        cardCategories: [...action.data]
+      };
+    case ActionTypes.CREATE_CATEGORY:
+      return { ...state, cardCategories: [...state.cardCategories, action.data] };
     case ActionTypes.UPDATE_CATEGORY:
-      return state;
+      return {
+        ...state,
+        cardCategories: state.cardCategories.map((category) => {
+          if (category._id === action.data._id) {
+            console.log('updated');
+            return action.data;
+          }
+          return category;
+        })
+      };
+    case ActionTypes.DELETE_CATEGORY:
+      return { ...state, cardCategories: state.cardCategories.filter((category) => category._id !== action.data) };
+    case ActionTypes.CREATE_WORD:
+    case ActionTypes.UPDATE_WORD:
+    case ActionTypes.DELETE_WORD:
+      return {
+        ...state,
+        cardCategories: state.cardCategories.map((category) => {
+          if (category._id === action.categoryId) {
+            return action.data;
+          }
+          return category;
+        })
+      };
     default:
       return state;
   }
@@ -59,12 +82,10 @@ const gameReducer = (state: GameState = gameInitialState, action: IAction): Game
         wrong: ++state.wrong
       };
     case ActionTypes.SET_CURRENT_CARD:
-      return action.data
-        ? {
-            ...state,
-            currentCard: action.data
-          }
-        : state;
+      return {
+        ...state,
+        currentCard: action.data
+      };
     case ActionTypes.START_GAME:
       return {
         ...state,
@@ -73,12 +94,10 @@ const gameReducer = (state: GameState = gameInitialState, action: IAction): Game
     case ActionTypes.STOP_GAME:
       return gameInitialState;
     case ActionTypes.SET_GAME_CARDS:
-      return action.data
-        ? {
-            ...state,
-            gameCards: action.data
-          }
-        : state;
+      return {
+        ...state,
+        gameCards: action.data
+      };
     default:
       return state;
   }

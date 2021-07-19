@@ -4,6 +4,7 @@ import { ICategory } from '../models/ICategory';
 type IAction = {
   type: string;
   data?: any;
+  categoryId?: string;
 };
 
 type CardsState = {

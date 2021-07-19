@@ -25,11 +25,16 @@ const AdminCategory: React.FC<Props> = ({ category }) => {
           }}
         >
           <div>
-            <input type="text" defaultValue={category.categoryName} onChange={(e) => setCategoryName(e.target.value)} />
+            <input
+              type="text"
+              defaultValue={category.categoryName}
+              onChange={(e) => setCategoryName(e.target.value)}
+              required
+            />
           </div>
           <div>
             <button className="admin-category__btn btn--green" type="submit">
-              submit
+              update
             </button>
             <button className="admin-category__btn btn--green" type="button" onClick={() => setEditMode(false)}>
               cancel
@@ -45,10 +50,10 @@ const AdminCategory: React.FC<Props> = ({ category }) => {
               Update
             </button>
             <NavLink
-              to={{ pathname: `${category.categoryName}/words`, state: category.cards }}
+              to={{ pathname: `${category.categoryName}/words`, state: category }}
               className="admin-category__btn btn--green"
             >
-              Add word
+              Configure
             </NavLink>
             <button onClick={() => deleteCategory(category._id || '')}>X</button>
           </div>

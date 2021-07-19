@@ -17,17 +17,15 @@ const AdminCategories: React.FC = () => {
           onSubmit={(e) => {
             e.preventDefault();
             createCategory({ categoryName, cards: [] });
-            // const newCategory = category;
-            // newCategory.categoryName = categoryName;
-            // updateCategory(category._id || '', newCategory);
+            setCategoryName('');
           }}
         >
           <div>
-            <input type="text" onChange={(e) => setCategoryName(e.target.value)} />
+            <input type="text" value={categoryName} onChange={(e) => setCategoryName(e.target.value)} required />
           </div>
           <div>
             <button className="admin-category__btn btn--green" type="submit">
-              submit
+              create
             </button>
             <button className="admin-category__btn btn--green" type="button">
               cancel
