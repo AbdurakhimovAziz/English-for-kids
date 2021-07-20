@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import SideNav from './menu/menu';
 import useActions from '../../hooks/useActions';
 import useTypeSelector from '../../hooks/useTypeSelector';
 import './header.scss';
+import Login from '../login/login';
 
 const Header: React.FC = () => {
   const { isMenuVisible, isPlayMode } = useTypeSelector((state) => state.global);
   const { gameStarted } = useTypeSelector((state) => state.game);
   const { toggleMenu, closeMenu, toggleAppMode, stopGame } = useActions();
+  const [loginShow, setLoginShow] = useState(false);
 
   const appModeHandler = () => {
     if (gameStarted) stopGame();
@@ -19,6 +21,8 @@ const Header: React.FC = () => {
   };
 
   const active = isMenuVisible ? 'active' : '';
+  const isLoginVisible = loginShow ? 'active' : '';
+
   return (
     <>
       <header className="header">
@@ -33,6 +37,10 @@ const Header: React.FC = () => {
                 <span>{isPlayMode ? 'Play' : 'Train'}</span>
               </span>
             </label>
+            <button className="login__btn" onClick={() => setLoginShow(true)}>
+              login
+            </button>
+            <Login className={isLoginVisible} hideForm={() => setLoginShow(false)} />
           </div>
         </div>
       </header>

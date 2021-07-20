@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import useActions from '../../hooks/useActions';
 import { ICard } from '../../models/ICard';
 import { ICategory } from '../../models/ICategory';
+import DeleteElement from '../deleteElement/deleteElement';
 import './word.scss';
 import WordForm from './wordForm';
 
@@ -15,7 +16,7 @@ const Word: React.FC<WordProps> = ({ word, category }) => {
   const { deleteWord } = useActions();
 
   return (
-    <div className="word">
+    <div className="word admin__card">
       {editMode ? (
         <WordForm category={category} currentWord={word} setEditMode={setEditMode} />
       ) : (
@@ -30,10 +31,10 @@ const Word: React.FC<WordProps> = ({ word, category }) => {
             Sound:
             <audio src={word.audioSrc} controls></audio>
           </div>
-          <button onClick={() => deleteWord(word._id || '', category._id || '')}>X</button>
-          <button className="btn--green" onClick={() => setEditMode(true)}>
+          <button className="admin__btn btn--green" onClick={() => setEditMode(true)}>
             Change
           </button>
+          <DeleteElement clickHandler={() => deleteWord(word._id || '', category._id || '')} />
         </>
       )}
     </div>

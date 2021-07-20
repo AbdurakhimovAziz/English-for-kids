@@ -27,7 +27,9 @@ const AdminHeader: React.FC = () => {
               Words
             </NavLink>
           </nav>
-          <button onClick={logoutHandler}>Logout</button>
+          <button className="admin-header__link" onClick={logoutHandler}>
+            Logout
+          </button>
         </div>
       </div>
     </header>

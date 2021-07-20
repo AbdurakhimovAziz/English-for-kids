@@ -34,35 +34,25 @@ const categoriesReducer = (state: CardsState = cardsInitialState, action: IActio
   switch (action.type) {
     case ActionTypes.FETCH_CARDS:
       return {
-        ...state,
         cardCategories: [...action.data]
       };
     case ActionTypes.CREATE_CATEGORY:
       return { ...state, cardCategories: [...state.cardCategories, action.data] };
     case ActionTypes.UPDATE_CATEGORY:
       return {
-        ...state,
-        cardCategories: state.cardCategories.map((category) => {
-          if (category._id === action.data._id) {
-            console.log('updated');
-            return action.data;
-          }
-          return category;
-        })
+        cardCategories: state.cardCategories.map((category) =>
+          category._id === action.data._id ? action.data : category
+        )
       };
     case ActionTypes.DELETE_CATEGORY:
-      return { ...state, cardCategories: state.cardCategories.filter((category) => category._id !== action.data) };
+      return { cardCategories: state.cardCategories.filter((category) => category._id !== action.data) };
     case ActionTypes.CREATE_WORD:
     case ActionTypes.UPDATE_WORD:
     case ActionTypes.DELETE_WORD:
       return {
-        ...state,
-        cardCategories: state.cardCategories.map((category) => {
-          if (category._id === action.categoryId) {
-            return action.data;
-          }
-          return category;
-        })
+        cardCategories: state.cardCategories.map((category) =>
+          category._id === action.categoryId ? action.data : category
+        )
       };
     default:
       return state;

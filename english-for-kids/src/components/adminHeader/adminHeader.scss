@@ -1,6 +1,6 @@
 .admin-header {
   padding: 20px 0;
-  background-color: limegreen;
+  background-color: #00c9ff;
   &__body {
     display: flex;
     align-items: center;
@@ -13,8 +13,10 @@
   &__link {
     margin-right: 20px;
     color: #fff;
+    line-height: 1;
   }
-  &__link.active {
-    text-decoration: underline;
+  &__link.active,
+  &__link:hover {
+    border-bottom: 1px solid #fff;
   }
 }

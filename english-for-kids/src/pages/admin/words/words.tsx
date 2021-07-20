@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import AddElement from '../../../components/addElement/addElement';
 import Word from '../../../components/word/word';
 import WordForm from '../../../components/word/wordForm';
 import useTypeSelector from '../../../hooks/useTypeSelector';
@@ -19,18 +20,21 @@ const Words: React.FC = () => {
   return (
     <>
       <div className="words__wrapper">
-        <h2>{category.categoryName}</h2>
+        <h2 className="words__title">
+          Category: <span>{category.categoryName}</span>
+        </h2>
         <div className="words">
           {category.cards.map((card, index) => (
             <Word word={card} category={category} key={index} />
           ))}
-          <div className="word word__card">
+          <div className="word admin__card">
             {editMode ? (
               <WordForm setEditMode={setEditMode} category={category} />
             ) : (
-              <button className="word__btn" onClick={() => setEditMode(true)}>
-                +
-              </button>
+              <>
+                <h2 className="admin__title">Add New Word</h2>
+                <AddElement setEditMode={setEditMode} />
+              </>
             )}
           </div>
         </div>

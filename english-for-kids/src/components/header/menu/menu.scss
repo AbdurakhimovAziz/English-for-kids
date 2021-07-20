@@ -21,9 +21,6 @@
       background-color: rgba(0, 0, 0, 0.2);
     }
   }
-  // &.active {
-  //   left: 0;
-  // }
   @media screen and (max-width: 576px) {
     &__link {
       font-size: 18px;
@@ -37,13 +34,23 @@
   left: -130%;
   height: 100%;
   width: 300px;
-  padding: 0 20px;
+  padding: 90px 20px 50px;
   z-index: 2;
   background: linear-gradient(to right, #67b26f, #4ca2cd);
   overflow-x: hidden;
-  padding-top: 90px;
   transition: 0.5s left;
   &.active {
     left: 0;
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      width: 300px;
+      height: 90px;
+      background: linear-gradient(to right, #67b26f, #4ca2cd);
+      z-index: 2;
+    }
   }
 }

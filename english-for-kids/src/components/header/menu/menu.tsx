@@ -1,22 +1,18 @@
 import React, { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import useTypeSelector from '../../../hooks/useTypeSelector';
-import { ICard } from '../../../models/ICard';
 import { CARDS_URL } from '../../../shared/constants';
 import Login from '../../login/login';
 import MenuItem from './menu-item';
 import './menu.scss';
 
 const SideNav: React.FC<{ className: string }> = ({ className }) => {
-  const [loginShow, setLoginShow] = useState(false);
   const { cardCategories } = useTypeSelector((state) => state.categories);
   const params = useLocation();
 
-  const isLoginVisible = loginShow ? 'active' : '';
-
   return (
     <div className={`side-menu ${className}`}>
-      <nav id="sideNav" className="nav">
+      <nav id="sideNav" className="menu">
         <ul className="menu__list">
           <MenuItem>
             <NavLink to="/" className={`menu__link `} activeClassName="active" exact data-hover="Main">
@@ -44,10 +40,6 @@ const SideNav: React.FC<{ className: string }> = ({ className }) => {
           </MenuItem>
         </ul>
       </nav>
-      <button className="login__btn" onClick={() => setLoginShow(true)}>
-        login
-      </button>
-      <Login className={isLoginVisible} hideForm={() => setLoginShow(false)} />
     </div>
   );
 };

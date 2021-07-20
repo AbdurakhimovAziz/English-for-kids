@@ -51,16 +51,17 @@ export const App = (): JSX.Element => {
       <>
         <AdminHeader />
         <main className="main">
-          <Switch>
-            <Route path="/" exact>
-              admin
-              <AdminCategories />
-            </Route>
-            <Route path="/:category/words">
-              <Words />
-            </Route>
-            <Redirect to="/" />
-          </Switch>
+          <div className="container">
+            <Switch>
+              <Route path="/" exact>
+                <AdminCategories />
+              </Route>
+              <Route path="/:category/words">
+                <Words />
+              </Route>
+              <Redirect to="/" />
+            </Switch>
+          </div>
         </main>
       </>
     );
@@ -80,6 +81,7 @@ export const App = (): JSX.Element => {
           <Route path="/statistics">
             <Statistics />
           </Route>
+          <Redirect to="/" />
         </Switch>
       </main>
       <Footer />

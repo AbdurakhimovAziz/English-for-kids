@@ -2,4 +2,15 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  &__title {
+    font-size: 24px;
+    margin-bottom: 40px;
+    text-align: center;
+    span {
+      font-weight: 700;
+    }
+  }
+  .admin__title {
+    margin-bottom: 20px;
+  }
 }

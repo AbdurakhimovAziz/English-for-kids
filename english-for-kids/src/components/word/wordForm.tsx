@@ -113,10 +113,10 @@ const WordForm: React.FC<WordFormProps> = ({ setEditMode, category, currentWord 
         />
       </label>
       <div>
-        <button className="admin-category__btn btn--green" type="submit" disabled={uploading}>
+        <button className="admin__btn btn--green" type="submit" disabled={uploading}>
           {currentWord ? 'update' : 'create'}
         </button>
-        <button className="admin-category__btn btn--green" type="button" onClick={() => setEditMode(false)}>
+        <button className="admin__btn btn--red" type="button" onClick={() => setEditMode(false)}>
           cancel
         </button>
       </div>
