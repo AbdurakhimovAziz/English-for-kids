@@ -11,14 +11,26 @@
     align-items: center;
   }
   &__link {
-    margin-right: 20px;
     color: #fff;
     line-height: 1;
     font-size: 18px;
     border-bottom: 1px solid transparent;
+    &:first-child {
+      margin-right: 20px;
+    }
   }
   &__link.active,
   &__link:hover {
     border-color: #fff;
+  }
+  @media screen and (max-width: 968px) {
+    &__link {
+      font-size: 16px;
+    }
+  }
+  @media screen and (max-width: 576px) {
+    &__link {
+      font-size: 14px;
+    }
   }
 }

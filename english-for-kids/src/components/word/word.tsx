@@ -15,6 +15,11 @@ const Word: React.FC<WordProps> = ({ word, category }) => {
   const [editMode, setEditMode] = useState(false);
   const { deleteWord } = useActions();
 
+  const deleteHandler = () => {
+    localStorage.removeItem(`${word.word}-${word.translation}`);
+    deleteWord(word._id || '', category._id || '');
+  };
+
   return (
     <div className="word admin__card">
       {editMode ? (
@@ -38,7 +43,7 @@ const Word: React.FC<WordProps> = ({ word, category }) => {
           <button className="admin__btn btn--blue" onClick={() => setEditMode(true)}>
             Change
           </button>
-          <DeleteElement clickHandler={() => deleteWord(word._id || '', category._id || '')} />
+          <DeleteElement clickHandler={deleteHandler} />
         </>
       )}
     </div>

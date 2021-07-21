@@ -14,6 +14,13 @@ const AdminCategory: React.FC<Props> = ({ category }) => {
   const [editMode, setEditMode] = useState(false);
   const [categoryName, setCategoryName] = useState('');
 
+  const deleteHandler = () => {
+    category.cards.forEach((card) => {
+      localStorage.removeItem(`${card.word}-${card.translation}`);
+    });
+    deleteCategory(category._id || '');
+  };
+
   return (
     <div className="admin-category admin__card">
       {editMode ? (
@@ -66,7 +73,7 @@ const AdminCategory: React.FC<Props> = ({ category }) => {
               Configure
             </NavLink>
           </div>
-          <DeleteElement clickHandler={() => deleteCategory(category._id || '')} />
+          <DeleteElement clickHandler={deleteHandler} />
         </>
       )}
     </div>

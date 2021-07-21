@@ -8,7 +8,9 @@
 
 .burger {
   position: relative;
+  left: 0;
   width: 50px;
+  transition: 0.8s ease-in-out;
   z-index: 3;
   &::before,
   &::after,
@@ -23,17 +25,31 @@
   }
   &.active {
     position: fixed;
+    left: 245px;
   }
-}
-
-.burger.active:before {
-  transform: translateY(12px) rotate(135deg);
-}
-.burger.active:after {
-  transform: translateY(-12px) rotate(-135deg);
-}
-.burger.active .burger__line {
-  transform: scale(0);
+  &.active:before {
+    transform: translateY(12px) rotate(135deg);
+  }
+  &.active:after {
+    transform: translateY(-12px) rotate(-135deg);
+  }
+  &.active .burger__line {
+    transform: scale(0);
+  }
+  @media screen and (max-width: 576px) {
+    width: 40px;
+    &::before,
+    &::after,
+    &__line {
+      height: 4px;
+    }
+    &.active::before {
+      transform: translateY(10px) rotate(135deg);
+    }
+    &.active::after {
+      transform: translateY(-10px) rotate(-135deg);
+    }
+  }
 }
 
 .overlay {
@@ -109,6 +125,18 @@
     box-shadow: 0 0 0 2px #f9d423, 0 0 8px #f9d423;
     span {
       left: 10%;
+    }
+  }
+
+  @media screen and (max-width: 576px) {
+    width: 80px;
+    height: 35px;
+    font-size: 14px;
+    &-text {
+      &::before {
+        width: 25px;
+        height: 25px;
+      }
     }
   }
 }

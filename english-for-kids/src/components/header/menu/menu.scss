@@ -11,9 +11,9 @@
     position: relative;
     display: block;
     padding: 10px;
-    border-radius: 10px;
+    border-radius: 8px;
     text-decoration: none;
-    font-size: 25px;
+    font-size: 22px;
     color: #fff;
     transition: background-color 0.3s;
     &:hover,
@@ -38,19 +38,14 @@
   z-index: 2;
   background: linear-gradient(to right, #67b26f, #4ca2cd);
   overflow-x: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
   transition: 0.5s left;
+  &::-webkit-scrollbar {
+    width: 0;
+  }
+
   &.active {
     left: 0;
-    &::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      width: 300px;
-      height: 90px;
-      background: linear-gradient(to right, #67b26f, #4ca2cd);
-      z-index: 2;
-    }
   }
 }

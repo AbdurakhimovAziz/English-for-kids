@@ -49,6 +49,10 @@ body.locked {
     opacity: 0.6;
     pointer-events: none;
   }
+  @media screen and (max-width: 576px) {
+    min-width: 80px;
+    padding: 8px;
+  }
 }
 
 .admin__delete-btn,
