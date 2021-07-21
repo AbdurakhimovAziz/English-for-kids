@@ -72,7 +72,7 @@ const Cards: React.FC = () => {
     }
   }, [currentCard]);
 
-  if (currentCards.length === 0) return <div className="empty">No cards to display</div>;
+  if (!currentCards || currentCards.length === 0) return <div className="empty">No cards to display</div>;
 
   return isGameOver ? (
     <div className={`${wrong > 0 ? 'failure' : 'success'}`}>

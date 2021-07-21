@@ -41,8 +41,8 @@ const WordForm: React.FC<WordFormProps> = ({ setEditMode, category, currentWord 
       audioSrc: urls[1]
     };
 
-    clearForm();
     createWord(category._id || '', newCard);
+    clearForm();
   };
 
   const updateWordHandler = async () => {
@@ -72,48 +72,67 @@ const WordForm: React.FC<WordFormProps> = ({ setEditMode, category, currentWord 
   };
 
   return (
-    <form onSubmit={submitHandler}>
-      <label htmlFor="word">
-        <input
-          type="text"
-          name="word"
-          id="word"
-          value={newWord.word}
-          onChange={(e) => setNewWord({ ...newWord, word: e.target.value })}
-          required
-        />
-      </label>
-      <label htmlFor="word">
-        <input
-          type="text"
-          name="translation"
-          id="translation"
-          value={newWord.translation}
-          onChange={(e) => setNewWord({ ...newWord, translation: e.target.value })}
-          required
-        />
-      </label>
-      <label htmlFor="word">
-        <input
-          type="file"
-          name="image"
-          id="image"
-          accept="image/*"
-          onChange={(e) => setNewWord({ ...newWord, image: e.target.files![0] })}
-        />
-      </label>
-      <label htmlFor="word">
-        <input
-          type="file"
-          name="audioSrc"
-          id="audioSrc"
-          accept="audio/*"
-          onChange={(e) => setNewWord({ ...newWord, audio: e.target.files![0] })}
-          required={!currentWord}
-        />
-      </label>
-      <div>
-        <button className="admin__btn btn--green" type="submit" disabled={uploading}>
+    <form onSubmit={submitHandler} className="word__form form-word">
+      <div className="form__inputs">
+        <div className="form-word__input">
+          <label htmlFor="word">Word</label>
+          <input
+            type="text"
+            name="word"
+            id="word"
+            value={newWord.word}
+            onChange={(e) => setNewWord({ ...newWord, word: e.target.value })}
+            required
+          />
+        </div>
+        <div className="form-word__input">
+          <label htmlFor="translation">Translation</label>
+          <input
+            type="text"
+            name="translation"
+            id="translation"
+            value={newWord.translation}
+            onChange={(e) => setNewWord({ ...newWord, translation: e.target.value })}
+            required
+          />
+        </div>
+        <div className="form-word__input file-input">
+          <p>
+            <span>Image:</span>
+            {newWord.image?.name}
+          </p>
+          <label htmlFor="image" className="admin__btn btn--green">
+            Select file
+          </label>
+          <input
+            type="file"
+            name="image"
+            id="image"
+            accept="image/*"
+            onChange={(e) => setNewWord({ ...newWord, image: e.target.files![0] })}
+          />
+        </div>
+        <div className="form-word__input file-input">
+          <p>
+            <span>Sound:</span>
+            {newWord.audio?.name}
+          </p>
+          <label htmlFor="audioSrc" className="admin__btn btn--green">
+            Select file
+          </label>
+          <input
+            type="file"
+            name="audioSrc"
+            id="audioSrc"
+            accept="audio/*"
+            onChange={(e) => setNewWord({ ...newWord, audio: e.target.files![0] })}
+            required={!currentWord}
+          />
+        </div>
+      </div>
+      {uploading ? <p>Loading...</p> : ''}
+      <div className="form-word__btns">
+        <button className="admin__btn btn--blue" type="submit" disabled={uploading}>
           {currentWord ? 'update' : 'create'}
         </button>
         <button className="admin__btn btn--red" type="button" onClick={() => setEditMode(false)}>

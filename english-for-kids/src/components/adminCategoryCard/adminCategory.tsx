@@ -41,7 +41,7 @@ const AdminCategory: React.FC<Props> = ({ category }) => {
             />
           </div>
           <div className="form-categories__btns">
-            <button className="admin__btn btn--green" type="submit">
+            <button className="admin__btn btn--blue" type="submit">
               update
             </button>
             <button className="admin__btn btn--red" type="button" onClick={() => setEditMode(false)}>
@@ -56,12 +56,12 @@ const AdminCategory: React.FC<Props> = ({ category }) => {
             Words: <span>{category.cards.length}</span>
           </p>
           <div className="admin-category__btns">
-            <button className="admin__btn btn--green" onClick={() => setEditMode(true)}>
+            <button className="admin__btn btn--blue" onClick={() => setEditMode(true)}>
               Update
             </button>
             <NavLink
               to={{ pathname: `${category.categoryName}/words`, state: category }}
-              className="admin__btn btn--green"
+              className="admin__btn btn--blue"
             >
               Configure
             </NavLink>

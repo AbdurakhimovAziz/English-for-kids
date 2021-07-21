@@ -39,7 +39,7 @@ const AdminCategories: React.FC = () => {
               />
             </div>
             <div className="form-categories__btns">
-              <button className="admin__btn btn--green" type="submit">
+              <button className="admin__btn btn--blue" type="submit">
                 create
               </button>
               <button

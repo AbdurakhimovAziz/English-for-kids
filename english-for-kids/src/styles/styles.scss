@@ -63,12 +63,24 @@ body.locked {
   right: 15px;
   font-size: 18px;
   font-weight: 700;
+  transition: opacity 0.3s;
+  &:hover {
+    opacity: 0.6;
+  }
 }
 
-.btn--green {
+.btn--blue {
   border: 1px solid #00c9ff;
   &:hover {
     background-color: #00c9ff;
+    color: #fff;
+  }
+}
+.btn--green {
+  border: 1px solid #00bf82;
+  color: #00bf82;
+  &:hover {
+    background-color: #00bf82;
     color: #fff;
   }
 }
@@ -89,6 +101,7 @@ body.locked {
   align-items: center;
   justify-content: center;
   flex: 0 0 auto;
+  align-self: center;
   background-image: url('../assets/plus.svg');
   background-size: 60%;
   background-position: center;

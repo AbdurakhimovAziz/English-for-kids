@@ -21,17 +21,21 @@ const Word: React.FC<WordProps> = ({ word, category }) => {
         <WordForm category={category} currentWord={word} setEditMode={setEditMode} />
       ) : (
         <>
-          <h3>Word: {word.word}</h3>
-          <p>Translation {word.translation}</p>
-          <div className="word__img">
-            Image:
-            <img src={word.image} alt={word.word} />
-          </div>
+          <h3 className="word__title">
+            Word:<span>{word.word}</span>
+          </h3>
+          <p className="word__text">
+            Translation:<span>{word.translation}</span>
+          </p>
           <div className="word__audio">
-            Sound:
-            <audio src={word.audioSrc} controls></audio>
+            <p className="word__audio-title">Sound:</p>
+            <audio className="word__audio-player" src={word.audioSrc} controls></audio>
           </div>
-          <button className="admin__btn btn--green" onClick={() => setEditMode(true)}>
+          <div className="word__img-container">
+            <p className="word__img-title">Image:</p>
+            <img className="word__img" src={word.image} alt={word.word} />
+          </div>
+          <button className="admin__btn btn--blue" onClick={() => setEditMode(true)}>
             Change
           </button>
           <DeleteElement clickHandler={() => deleteWord(word._id || '', category._id || '')} />
