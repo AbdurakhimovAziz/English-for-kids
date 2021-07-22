@@ -10,20 +10,16 @@ const Home: React.FC = () => {
   const { isPlayMode } = useTypeSelector((state) => state.global);
 
   return (
-    <>
-      <div className="container">
-        <div className={`categories cards__row ${isPlayMode ? 'play-mode' : ''}`}>
-          {cardCategories.map((category, index) => (
-            <NavLink className="categories__card card" to={{ pathname: CARDS_URL, state: category.cards }} key={index}>
-              <div className="categories__card-img">
-                <img src={`${category.cards[0] ? category.cards[0].image : noImage}`} />
-              </div>
-              <div className="categories__card-title">{category.categoryName}</div>
-            </NavLink>
-          ))}
-        </div>
-      </div>
-    </>
+    <div className={`categories cards__row ${isPlayMode ? 'play-mode' : ''}`}>
+      {cardCategories.map((category, index) => (
+        <NavLink className="categories__card card" to={{ pathname: CARDS_URL, state: category.cards }} key={index}>
+          <div className="categories__card-img">
+            <img src={`${category.cards[0] ? category.cards[0].image : noImage}`} />
+          </div>
+          <div className="categories__card-title">{category.categoryName}</div>
+        </NavLink>
+      ))}
+    </div>
   );
 };
 

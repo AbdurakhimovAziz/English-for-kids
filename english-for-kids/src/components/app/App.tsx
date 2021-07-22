@@ -71,18 +71,20 @@ export const App = (): JSX.Element => {
     <>
       <Header />
       <main className="main">
-        <Switch>
-          <Route path="/" exact>
-            <Home />
-          </Route>
-          <Route path="/cards">
-            <Cards />
-          </Route>
-          <Route path="/statistics">
-            <Statistics />
-          </Route>
-          <Redirect to="/" />
-        </Switch>
+        <div className="container">
+          <Switch>
+            <Route path="/" exact>
+              <Home />
+            </Route>
+            <Route path="/cards">
+              <Cards />
+            </Route>
+            <Route path="/statistics">
+              <Statistics />
+            </Route>
+            <Redirect to="/" />
+          </Switch>
+        </div>
       </main>
       <Footer />
     </>
