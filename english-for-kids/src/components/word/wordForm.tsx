@@ -3,6 +3,7 @@ import useActions from '../../hooks/useActions';
 import { ICard } from '../../models/ICard';
 import { ICategory } from '../../models/ICategory';
 import INewWord from '../../models/INewWord';
+import getToken from '../../shared/getToken';
 import uploadToCloudinary from '../../shared/uploadToCloudinary';
 
 export interface WordFormProps {
@@ -10,14 +11,13 @@ export interface WordFormProps {
   category: ICategory;
   currentWord?: ICard;
 }
+const imagePreset = 'gjeytnyo';
+const audioPreset = 'jmckagk3';
 
 const WordForm: React.FC<WordFormProps> = ({ setEditMode, category, currentWord }) => {
   const [newWord, setNewWord] = useState<INewWord>({ word: '', translation: '' });
   const [uploading, setUploading] = useState(false);
-  const { createWord, updateWord } = useActions();
-
-  const imagePreset = 'gjeytnyo';
-  const audioPreset = 'jmckagk3';
+  const { createWord, updateWord, clearToken } = useActions();
 
   useEffect(() => {
     if (currentWord) setNewWord({ word: currentWord.word, translation: currentWord.translation });
@@ -66,6 +66,10 @@ const WordForm: React.FC<WordFormProps> = ({ setEditMode, category, currentWord 
 
   const submitHandler: React.FormEventHandler = (e) => {
     e.preventDefault();
+    if (!getToken()) {
+      clearToken();
+      return;
+    }
     setUploading(true);
     if (currentWord) updateWordHandler();
     else createWordHandler();

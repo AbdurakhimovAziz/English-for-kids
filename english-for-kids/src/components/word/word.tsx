@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import useActions from '../../hooks/useActions';
 import { ICard } from '../../models/ICard';
 import { ICategory } from '../../models/ICategory';
+import getToken from '../../shared/getToken';
 import DeleteElement from '../deleteElement/deleteElement';
 import './word.scss';
 import WordForm from './wordForm';
@@ -13,9 +14,13 @@ export interface WordProps {
 
 const Word: React.FC<WordProps> = ({ word, category }) => {
   const [editMode, setEditMode] = useState(false);
-  const { deleteWord } = useActions();
+  const { deleteWord, clearToken } = useActions();
 
   const deleteHandler = () => {
+    if (!getToken()) {
+      clearToken();
+      return;
+    }
     localStorage.removeItem(`${word.word}-${word.translation}`);
     deleteWord(word._id || '', category._id || '');
   };

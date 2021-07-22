@@ -44,6 +44,8 @@ export const setToken = (userToken: IToken): IAction => {
   };
 };
 
+export const clearToken = (): IAction => ({ type: ActionTypes.CLEAR_TOKEN });
+
 export const createCategory =
   (category: ICategory) =>
   async (dispatch: Dispatch<IAction>): Promise<void> => {

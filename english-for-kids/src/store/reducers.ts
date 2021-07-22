@@ -25,6 +25,8 @@ const globalReducer = (state: GlobalState = globalInitialState, action: IAction)
         ...state,
         token: action.data || ''
       };
+    case ActionTypes.CLEAR_TOKEN:
+      return { ...state, token: null };
     default:
       return state;
   }

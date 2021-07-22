@@ -3,6 +3,8 @@ import AddElement from '../../../components/addElement/addElement';
 import AdminCategory from '../../../components/adminCategoryCard/adminCategory';
 import useActions from '../../../hooks/useActions';
 import useTypeSelector from '../../../hooks/useTypeSelector';
+import getToken from '../../../shared/getToken';
+import { clearToken } from '../../../store/actionCreators';
 import './admin-categories.scss';
 
 const AdminCategories: React.FC = () => {
@@ -11,19 +13,23 @@ const AdminCategories: React.FC = () => {
   const [categoryName, setCategoryName] = useState('');
   const [editmode, setEditMode] = useState(false);
 
+  const submitHandler: React.FormEventHandler = (e) => {
+    e.preventDefault();
+    if (!getToken()) {
+      clearToken();
+      return;
+    }
+
+    createCategory({ categoryName, cards: [] });
+    setCategoryName('');
+  };
+
   return (
     <div className="admin-categories">
       {cardCategories && cardCategories.map((category, index) => <AdminCategory category={category} key={index} />)}
       <div className="admin-category admin__card">
         {editmode ? (
-          <form
-            className="categories__form form-categories"
-            onSubmit={(e) => {
-              e.preventDefault();
-              createCategory({ categoryName, cards: [] });
-              setCategoryName('');
-            }}
-          >
+          <form className="categories__form form-categories" onSubmit={submitHandler}>
             <div className="form-categories__input">
               <label className="form-categories__label" htmlFor="category-name">
                 Category name

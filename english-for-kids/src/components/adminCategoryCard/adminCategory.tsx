@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import useActions from '../../hooks/useActions';
 import { ICategory } from '../../models/ICategory';
+import getToken from '../../shared/getToken';
 import DeleteElement from '../deleteElement/deleteElement';
 import './adminCategory.scss';
 
@@ -10,29 +11,36 @@ export interface Props {
 }
 
 const AdminCategory: React.FC<Props> = ({ category }) => {
-  const { updateCategory, deleteCategory } = useActions();
+  const { updateCategory, deleteCategory, clearToken } = useActions();
   const [editMode, setEditMode] = useState(false);
   const [categoryName, setCategoryName] = useState('');
 
   const deleteHandler = () => {
+    if (!getToken()) {
+      clearToken();
+      return;
+    }
     category.cards.forEach((card) => {
       localStorage.removeItem(`${card.word}-${card.translation}`);
     });
     deleteCategory(category._id || '');
   };
 
+  const submitHandler: React.FormEventHandler = (e) => {
+    e.preventDefault();
+    if (!getToken()) {
+      clearToken();
+      return;
+    }
+    category.categoryName = categoryName;
+    updateCategory(category._id || '', category);
+    setEditMode(false);
+  };
+
   return (
     <div className="admin-category admin__card">
       {editMode ? (
-        <form
-          className="categories__form form-categories"
-          onSubmit={(e) => {
-            e.preventDefault();
-            category.categoryName = categoryName;
-            updateCategory(category._id || '', category);
-            setEditMode(false);
-          }}
-        >
+        <form className="categories__form form-categories" onSubmit={submitHandler}>
           <div className="form-categories__input">
             <label className="form-categories__label" htmlFor="category-name">
               Category name
