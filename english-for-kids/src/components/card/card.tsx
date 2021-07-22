@@ -7,64 +7,62 @@ import correctSound from '../../assets/correct.mp3';
 import wrongSound from '../../assets/error.mp3';
 import changeCardStats from '../../shared/changeCardStats';
 import { CardStatsProps } from '../../shared/constants';
+import { ICard } from '../../models/ICard';
 
 interface PropTypes {
-  imgSrc: string;
-  word: string;
-  translation: string;
-  audioSrc: string;
+  card: ICard;
   soundPlaying: boolean;
 }
 
 const ROTATE_CLASS = 'rotate';
 const CORRECT_CLASS = 'correct';
 
-const Card: React.FC<PropTypes> = ({ imgSrc, word, translation, audioSrc, soundPlaying }) => {
+const Card: React.FC<PropTypes> = ({ card, soundPlaying }) => {
   const { isPlayMode } = useTypeSelector((state) => state.global);
   const { currentCard, gameStarted } = useTypeSelector((state) => state.game);
   const { addCorrectMove, addWrongMove } = useActions();
-  const audio = new Audio(audioSrc);
+  const audio = new Audio(card.audioSrc);
 
-  const card = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
   const clickHandler = () => {
     if (gameStarted && !soundPlaying) {
-      if (currentCard?.word === word) {
-        changeCardStats(`${currentCard?.word}-${currentCard?.translation}`, CardStatsProps.correctClicks);
+      if (currentCard?._id === card._id) {
+        changeCardStats(card._id || '', CardStatsProps.correctClicks);
         playAudio(correctSound);
         addCorrectMove();
-        card.current?.classList.add(CORRECT_CLASS);
+        cardRef.current?.classList.add(CORRECT_CLASS);
       } else {
-        changeCardStats(`${currentCard?.word}-${currentCard?.translation}`, CardStatsProps.wrongClicks);
+        changeCardStats(card._id || '', CardStatsProps.wrongClicks);
         playAudio(wrongSound);
         addWrongMove();
       }
     }
     if (isPlayMode) return;
-    changeCardStats(`${word}-${translation}`, CardStatsProps.clicks);
+    changeCardStats(card._id || '', CardStatsProps.clicks);
     audio.currentTime = 0;
     audio.play();
   };
 
   useEffect(() => {
-    if (!gameStarted) card.current?.classList.remove(CORRECT_CLASS);
+    if (!gameStarted) cardRef.current?.classList.remove(CORRECT_CLASS);
   }, [gameStarted]);
 
   return (
-    <div className="cards__card" ref={card} onMouseLeave={() => card.current?.classList.remove(ROTATE_CLASS)}>
+    <div className="cards__card" ref={cardRef} onMouseLeave={() => cardRef.current?.classList.remove(ROTATE_CLASS)}>
       <div className="card__front card" onClick={clickHandler}>
         <div className={`cards__card-img ${isPlayMode ? 'img--cover' : ''}`}>
-          <img src={imgSrc} alt={word} />
+          <img src={card.image} alt={card.word} />
         </div>
         {isPlayMode ? (
           ''
         ) : (
           <div className="card__title">
-            {word}
+            {card.word}
             <div
               className="card__rotate"
               onClick={(e) => {
                 e.stopPropagation();
-                card.current?.classList.add(ROTATE_CLASS);
+                cardRef.current?.classList.add(ROTATE_CLASS);
               }}
             >
               <img src={rotateImg} alt="rotate icon" />
@@ -74,9 +72,9 @@ const Card: React.FC<PropTypes> = ({ imgSrc, word, translation, audioSrc, soundP
       </div>
       <div className="card__back card">
         <div className="cards__card-img">
-          <img src={imgSrc} alt={translation} />
+          <img src={card.image} alt={card.translation} />
         </div>
-        {isPlayMode ? '' : <div className="card__title">{translation}</div>}
+        {isPlayMode ? '' : <div className="card__title">{card.translation}</div>}
       </div>
     </div>
   );

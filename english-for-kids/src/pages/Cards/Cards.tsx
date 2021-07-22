@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
-import Card from '../../components/card/card';
 import useActions from '../../hooks/useActions';
 import useTypeSelector from '../../hooks/useTypeSelector';
 import playAudio from '../../shared/playAudio';
@@ -10,6 +9,7 @@ import delay from '../../shared/delay';
 import gameWinSound from '../../assets/game-win.mp3';
 import gameLooseSound from '../../assets/game-over.mp3';
 import { ICard } from '../../models/ICard';
+import Card from '../../components/card/card';
 
 const Cards: React.FC = () => {
   const { isPlayMode } = useTypeSelector((state) => state.global);
@@ -87,14 +87,7 @@ const Cards: React.FC = () => {
       </div>
       <div className="cards__row">
         {currentCards?.map((card, index) => (
-          <Card
-            imgSrc={card.image}
-            word={card.word}
-            translation={card.translation}
-            audioSrc={card.audioSrc}
-            key={index}
-            soundPlaying={soundPlaying}
-          />
+          <Card card={card} key={index} soundPlaying={soundPlaying} />
         ))}
       </div>
       {isPlayMode ? (

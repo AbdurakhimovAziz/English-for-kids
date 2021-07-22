@@ -40,7 +40,7 @@ export const App = (): JSX.Element => {
           wrongClicks: 0,
           correctPersent: 0
         };
-        const key = `${card.word}-${card.translation}`;
+        const key = card._id || '';
         if (!localStorage.getItem(key)) localStorage.setItem(key, JSON.stringify(cardStats));
       });
     });

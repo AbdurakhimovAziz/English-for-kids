@@ -21,7 +21,7 @@ const Word: React.FC<WordProps> = ({ word, category }) => {
       clearToken();
       return;
     }
-    localStorage.removeItem(`${word.word}-${word.translation}`);
+    localStorage.removeItem(word._id || '');
     deleteWord(word._id || '', category._id || '');
   };
 

@@ -21,7 +21,7 @@ const AdminCategory: React.FC<Props> = ({ category }) => {
       return;
     }
     category.cards.forEach((card) => {
-      localStorage.removeItem(`${card.word}-${card.translation}`);
+      localStorage.removeItem(card._id || '');
     });
     deleteCategory(category._id || '');
   };
