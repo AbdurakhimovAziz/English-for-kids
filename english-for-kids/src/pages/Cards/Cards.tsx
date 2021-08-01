@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import useActions from '../../hooks/useActions';
 import useTypeSelector from '../../hooks/useTypeSelector';
-import playAudio from '../../shared/playAudio';
+import { playAudio } from '../../shared/playAudio';
 import './cards.scss';
 import delay from '../../shared/delay';
 import gameWinSound from '../../assets/game-win.mp3';
@@ -62,12 +62,9 @@ const Cards: React.FC = () => {
   useEffect(() => {
     if (gameStarted) {
       setSoundPlaying(true);
-      delay(2000).then(() => {
-        const audio = playAudio(currentCard?.audioSrc);
-        if (audio)
-          audio.onended = () => {
-            setSoundPlaying(false);
-          };
+      delay(2000).then(async () => {
+        await playAudio(currentCard?.audioSrc);
+        setSoundPlaying(false);
       });
     }
   }, [currentCard]);

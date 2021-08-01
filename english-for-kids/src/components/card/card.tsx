@@ -1,10 +1,8 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import rotateImg from '../../assets/rotate.svg';
 import useActions from '../../hooks/useActions';
 import useTypeSelector from '../../hooks/useTypeSelector';
-import playAudio from '../../shared/playAudio';
-import correctSound from '../../assets/correct.mp3';
-import wrongSound from '../../assets/error.mp3';
+import { playCorrectSound, playWrongSound } from '../../shared/playAudio';
 import changeCardStats from '../../shared/changeCardStats';
 import { CardStatsProps } from '../../shared/constants';
 import { ICard } from '../../models/ICard';
@@ -21,26 +19,32 @@ const Card: React.FC<PropTypes> = ({ card, soundPlaying }) => {
   const { isPlayMode } = useTypeSelector((state) => state.global);
   const { currentCard, gameStarted } = useTypeSelector((state) => state.game);
   const { addCorrectMove, addWrongMove } = useActions();
-  const audio = new Audio(card.audioSrc);
+  const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    setAudio(new Audio(card.audioSrc));
+  }, []);
 
   const cardRef = useRef<HTMLDivElement>(null);
   const clickHandler = () => {
     if (gameStarted && !soundPlaying) {
       if (currentCard?._id === card._id) {
         changeCardStats(card._id || '', CardStatsProps.correctClicks);
-        playAudio(correctSound);
+        playCorrectSound();
         addCorrectMove();
         cardRef.current?.classList.add(CORRECT_CLASS);
       } else {
         changeCardStats(card._id || '', CardStatsProps.wrongClicks);
-        playAudio(wrongSound);
+        playWrongSound();
         addWrongMove();
       }
     }
     if (isPlayMode) return;
     changeCardStats(card._id || '', CardStatsProps.clicks);
-    audio.currentTime = 0;
-    audio.play();
+    if (audio) {
+      audio.currentTime = 0;
+      audio.play();
+    }
   };
 
   useEffect(() => {
