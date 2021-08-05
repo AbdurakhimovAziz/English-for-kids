@@ -34,24 +34,33 @@ const globalReducer = (state: GlobalState = globalInitialState, action: IAction)
 
 const categoriesReducer = (state: CardsState = cardsInitialState, action: IAction): CardsState => {
   switch (action.type) {
+    case ActionTypes.CARDS_LOADING:
+      return {
+        ...state,
+        loading: true
+      };
     case ActionTypes.FETCH_CARDS:
       return {
+        ...state,
+        loading: false,
         cardCategories: [...action.data]
       };
     case ActionTypes.CREATE_CATEGORY:
       return { ...state, cardCategories: [...state.cardCategories, action.data] };
     case ActionTypes.UPDATE_CATEGORY:
       return {
+        ...state,
         cardCategories: state.cardCategories.map((category) =>
           category._id === action.data._id ? action.data : category
         )
       };
     case ActionTypes.DELETE_CATEGORY:
-      return { cardCategories: state.cardCategories.filter((category) => category._id !== action.data) };
+      return { ...state, cardCategories: state.cardCategories.filter((category) => category._id !== action.data) };
     case ActionTypes.CREATE_WORD:
     case ActionTypes.UPDATE_WORD:
     case ActionTypes.DELETE_WORD:
       return {
+        ...state,
         cardCategories: state.cardCategories.map((category) =>
           category._id === action.categoryId ? action.data : category
         )

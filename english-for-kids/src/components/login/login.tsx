@@ -11,6 +11,7 @@ const Login: React.FC<{ className: string; hideForm: () => void }> = ({ classNam
   const [formvalid, setFormValid] = useState(true);
   const [usernameValid, setUsernameValid] = useState(true);
   const [passwordValid, setPasswordValid] = useState(true);
+  const [loading, setLoading] = useState(false);
   const { setToken } = useActions();
 
   useEffect(() => {
@@ -19,12 +20,20 @@ const Login: React.FC<{ className: string; hideForm: () => void }> = ({ classNam
 
   const handleSubmit: React.FormEventHandler = async (e) => {
     e.preventDefault();
-    const token = await loginUser({
-      username,
-      password
-    });
-    hideForm();
-    setToken(token);
+    try {
+      setLoading(true);
+      const token = await loginUser({
+        username,
+        password
+      });
+      setLoading(false);
+      hideForm();
+      setToken(token);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+      hideForm();
+    }
   };
   const errorClass = (state: boolean): string => (state ? '' : 'invalid');
 
@@ -63,8 +72,9 @@ const Login: React.FC<{ className: string; hideForm: () => void }> = ({ classNam
               }}
             />
           </div>
-          <button className="login__cancel" type="button" onClick={hideForm}></button>
-          <button className="login__submit" type="submit" disabled={!formvalid}>
+          {loading ? <div style={{ marginTop: '15px' }}>Loading...</div> : ''}
+          <button className="login__cancel" type="button" onClick={hideForm} disabled={loading}></button>
+          <button className="login__submit" type="submit" disabled={!formvalid || loading}>
             Submit
           </button>
         </form>

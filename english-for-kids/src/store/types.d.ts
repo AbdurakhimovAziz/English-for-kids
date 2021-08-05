@@ -9,6 +9,7 @@ type IAction = {
 
 type CardsState = {
   cardCategories: ICategory[];
+  loading: boolean;
 };
 
 type GlobalState = {

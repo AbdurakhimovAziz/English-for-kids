@@ -15,6 +15,7 @@ export const fetchCards =
   () =>
   async (dispatch: Dispatch<IAction>): Promise<void> => {
     try {
+      dispatch({ type: ActionTypes.CARDS_LOADING });
       const response = await fetch(`${SERVER_URL}/categories`);
       const data: ICategory[] = await response.json();
 

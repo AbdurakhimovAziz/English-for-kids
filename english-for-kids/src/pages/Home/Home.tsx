@@ -4,10 +4,13 @@ import useTypeSelector from '../../hooks/useTypeSelector';
 import { CARDS_URL } from '../../shared/constants';
 import noImage from '../../assets/no-image.png';
 import './home.scss';
+import Loader from '../../components/loader/loader';
 
 const Home: React.FC = () => {
-  const { cardCategories } = useTypeSelector((state) => state.categories);
+  const { cardCategories, loading } = useTypeSelector((state) => state.categories);
   const { isPlayMode } = useTypeSelector((state) => state.global);
+
+  if (loading) return <Loader />;
 
   return (
     <div className={`categories cards__row ${isPlayMode ? 'play-mode' : ''}`}>

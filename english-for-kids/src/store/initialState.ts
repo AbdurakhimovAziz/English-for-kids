@@ -8,7 +8,8 @@ export const globalInitialState: GlobalState = {
 };
 
 export const cardsInitialState: CardsState = {
-  cardCategories: []
+  cardCategories: [],
+  loading: false
 };
 
 export const gameInitialState: GameState = {
