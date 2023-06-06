@@ -39,12 +39,12 @@ router.delete('/:id', async (req, res) => {
   try {
     const updatedCategory = await CategoryModel.findOneAndUpdate(
       {
-        'cards._id': mongoose.Types.ObjectId(_id),
+        'cards._id': new mongoose.Types.ObjectId(_id),
       },
       {
         $pull: {
           cards: {
-            _id: mongoose.Types.ObjectId(_id),
+            _id: new mongoose.Types.ObjectId(_id),
           },
         },
       },
@@ -69,7 +69,7 @@ router.patch('/:id', async (req, res) => {
   try {
     const updatedCategory = await CategoryModel.findOneAndUpdate(
       {
-        'cards._id': mongoose.Types.ObjectId(_id),
+        'cards._id': new mongoose.Types.ObjectId(_id),
       },
       {
         $set: {
@@ -80,7 +80,7 @@ router.patch('/:id', async (req, res) => {
         new: true,
         arrayFilters: [
           {
-            'word._id': mongoose.Types.ObjectId(_id),
+            'word._id': new mongoose.Types.ObjectId(_id),
           },
         ],
       }
