@@ -4,7 +4,7 @@
   "scripts": {
     "start": "ts-node ./src/app.ts",
     "start:prod": "npm run build && node ./dist/src/app.js",
-    "build": "tsc",
+    "build": "npx tsc",
     "serve": "nodemon",
     "lint": "eslint src --ext .ts,.js"
   },
