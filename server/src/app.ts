@@ -21,7 +21,9 @@ app.use('/login', user);
 
 const start = async () => {
   try {
-    await mongoose.connect(process.env.MONGO_URI || '');
+    await mongoose.connect(process.env.MONGO_URI || '', {
+      dbName: 'myFirstDatabase',
+    });
     console.log('connected to mongo database');
     app.listen(PORT, () => console.log(`listening on port : ${PORT}`));
   } catch (error) {
